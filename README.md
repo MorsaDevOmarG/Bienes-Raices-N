@@ -19,4 +19,34 @@
     - Manejo de errores
     - Soporte de template engines
     - En caso de necesitar algo extra, se puede instalar con NPM
-    - 
+
+### Creando proyecto
+
+- En consola ejecutamos:
+  - **_npm init_**
+  - Esto nos crea el:
+    - **package.json**
+  - Otra opción no no queremos poner algo en las preguntas es:
+    - **_npm init -y_**
+  - **package name**
+    - ENTER
+  - **version**
+    - ENTER
+  - **description**
+    - Ponemos una breve descripción del proyecto
+  - **entry point**
+    - ENTER
+  - **test command**
+    - ENTER
+  - **git repository**
+    - Ponemos el repositorio si tenemos alguno, cuando ya lo ligaste a _GIT_, por default lo pone
+  - **keyword**
+    - Ponemos las tecnologías con las que se trabajará el proyecto, MySQL, Sequelize
+  - **author**
+    - Puedes poner tu nombre
+  - **license**
+    - ENTER
+  - **type**
+    - ENTER
+  - **Is this OK?**
+    - ENTER / yes

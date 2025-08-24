@@ -1,0 +1,27 @@
+{
+  "name": "bienesraices",
+  "version": "1.0.0",
+  "description": "Proyecto Bienes Raices con Node",
+  "keywords": [
+    "MVC",
+    "Pug",
+    "Talwind",
+    "MySQL",
+    "Sequelize"
+  ],
+  "homepage": "https://github.com/Omar0511/Bienes-Raices-N#readme",
+  "bugs": {
+    "url": "https://github.com/Omar0511/Bienes-Raices-N/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Omar0511/Bienes-Raices-N.git"
+  },
+  "license": "ISC",
+  "author": "Omar Garcia ommaarr05@gmail.com",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
