@@ -1,4 +1,5 @@
-import express from 'express';
+// Extrar la libreria de express, COMMON, manera antugua
+const express = require('express');
 
 // Crear la app
 const app = express();

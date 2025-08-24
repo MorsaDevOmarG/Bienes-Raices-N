@@ -69,6 +69,9 @@
           "server": "nodemon index.js"
         },
     ```
+  - Si creamos o tenemos _EXPRESS_ con la versión antigua: **COMMON**, en el _package.json_ en: **type**, aparecerá: _COMMON_, pero si vamos a usar la nueva sintaxis debemos cambiarlo por: 
+    - **"type": "module"**
+  - 
 
 #### Dependencias
 
