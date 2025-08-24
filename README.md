@@ -26,7 +26,7 @@
   - **_npm init_**
   - Esto nos crea el:
     - **package.json**
-  - Otra opción no no queremos poner algo en las preguntas es:
+  - Otra opción si no queremos poner algo en las preguntas y que lo cree, ingresamos:
     - **_npm init -y_**
   - **package name**
     - ENTER
@@ -50,3 +50,20 @@
     - ENTER
   - **Is this OK?**
     - ENTER / yes
+
+#### Dependencias
+
+- Instalando dependencias
+  - **DEPENDENCIA PRODUCCION**
+    - **_npm install nombreDependencia_**
+  - Primero instalamos:
+    - **_npm i express_**
+  - Al instalar una dependencia, se generan nuevos archivos:
+    - **node_modules**
+    - **package-lock.json**
+  - **Nota**
+    - La carpeta: _node\_modules_ , no es necesario subirla a **GIT**, la podemos eliminar, simplemente si queremos que se cree, ejecutamos:
+      - **_npm i_**
+  - **DEPENDENCIAS DESARROLLO**
+    - **_npm i --save-dev nombreDependencia_**
+    - **_npm i -D nombreDependencia_**
