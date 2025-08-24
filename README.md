@@ -50,6 +50,25 @@
     - ENTER
   - **Is this OK?**
     - ENTER / yes
+  - Creamos el archivo principal:
+    - **_index.js_**
+  - Dentro del: **package**, agregamos un _script_ para mandar a llamarlo, ejemplo:
+    - ````
+        "scripts": {
+          "start": "node index.js"
+        },
+    ```
+  - Para mandarlos a llamar, ejecutamos:
+    - **_npm run start_**
+  - Instalamos una dependencia de desarrollo para que reinicie el servidor cada vez que tenemos cambios: en archivos **.JS**
+    - **_npm i -D nodemon_**
+  - Para hacer uso de: _nodemon_
+    -  ````
+        "scripts": {
+          "start": "node index.js"
+          "server": "nodemon index.js"
+        },
+    ```
 
 #### Dependencias
 
