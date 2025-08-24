@@ -71,7 +71,6 @@
     ```
   - Si creamos o tenemos _EXPRESS_ con la versión antigua: **COMMON**, en el _package.json_ en: **type**, aparecerá: _COMMON_, pero si vamos a usar la nueva sintaxis debemos cambiarlo por: 
     - **"type": "module"**
-  - 
 
 #### Dependencias
 
@@ -89,3 +88,18 @@
   - **DEPENDENCIAS DESARROLLO**
     - **_npm i --save-dev nombreDependencia_**
     - **_npm i -D nombreDependencia_**
+
+##### ROUTING
+
+- Es por donde van a transitar los usuarios de nuestro sitio web o aplicación.
+- Con diferentes rutas, nuestros usuarios podrán navegar a lo largo de diferentes secciones del sitio web o llenar diferente formularios.
+- _HTTP_
+- **GET**
+  - Utilizado para mostrar información
+- **POST**
+  - Utilizado para enviar información
+- **PUT/PATCH**
+  - Utilizado para actualizar información
+- **DELETE**
+  - Utilizado para eliminar información
+- 
