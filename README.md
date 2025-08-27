@@ -58,8 +58,8 @@
           "start": "node index.js"
         },
     ```
-  - Para mandarlos a llamar, ejecutamos:
-    - **_npm run start_**
+    - Para mandarlos a llamar, ejecutamos:
+      - **_npm run start_**
   - Instalamos una dependencia de desarrollo para que reinicie el servidor cada vez que tenemos cambios: en archivos **.JS**
     - **_npm i -D nodemon_**
   - Para hacer uso de: _nodemon_
@@ -71,6 +71,8 @@
     ```
   - Si creamos o tenemos _EXPRESS_ con la versión antigua: **COMMON**, en el _package.json_ en: **type**, aparecerá: _COMMON_, pero si vamos a usar la nueva sintaxis debemos cambiarlo por: 
     - **"type": "module"**
+  - **NOTA**
+    - Si subimos el proyecto a _GIT HUB_ y se clona en otra computadora, recordemos no trae el: _NODE MODULES_, para ello solo ejecutamos: **npm install**, como recomendación tendríamos que ejecutarlo con la versión en la que se uso el proyecto, este proyecto usa: **_NODE V.22.18.0_**
 
 #### Dependencias
 
@@ -102,4 +104,5 @@
   - Utilizado para actualizar información
 - **DELETE**
   - Utilizado para eliminar información
-- 
+
+## TEMPLATE ENGINE
