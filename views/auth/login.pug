@@ -1,8 +1,13 @@
 div 
 
+  //- Formas de agregar clases o ids
   //- h2.text-center Login
-  h2(class="text-center") Login
+  //- h2(class="text-center") Login
   //- h2(id="text-center") Login
   //- h2#text-center Login
 
-  p Inicia sesión
+  //- Formas de agregar variables
+  if  autenticado
+    p Usuario autenticado
+  else
+    p Inicia sesión

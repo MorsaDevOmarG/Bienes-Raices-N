@@ -20,7 +20,7 @@ const router = express.Router();
 // Render: se encarga de mostrar una vista, no es necesario poner: views, render se encargar de escanear la carpeta views
 router.get("/login", (req, res) => {
   res.render("auth/login", {
-    pagina: "Login",
+    autenticado: true
   });
 });
 
