@@ -19,6 +19,18 @@
     - Manejo de errores
     - Soporte de template engines
     - En caso de necesitar algo extra, se puede instalar con NPM
+- Template Engine
+  - Motores de plantilla, son tecnologías que nos permiten crear el código _HTML_ y mostrar información contenida en variables de una forma mpas compacta y clara.
+  - _Pug, Handlebars, EJS_ son las opciones más polulares para **Node.js**.
+  - También es posible utilizar _React, Angular, Svelte o Vue_ como tu Templa Engine; pero necesitarás crear una **API** con respuestas _JSON_.
+  - ## Ventjas
+    - La forma en que se crea el código _HTML_ tiene a ser más simple.
+    - Puede utilizar e imprimir información del servidor o base de datos de una forma más sencilla.
+    - La seguridad es más sencilla de implementar ya que la información es renderizada por el mismo servidor.
+  - ## Desventajas
+    - C_uando mostramos información con un template engine, esta información y sus interacciones no son muy dinámicas a comparación de _React o Vue_.
+    - Consumen más recursos ya que el código _HTML_ es creado por el servidor a diferencia de: _Vue o React_ donde es creado por el cliente (navegador).
+
 
 ### Creando proyecto
 
@@ -106,3 +118,5 @@
   - Utilizado para eliminar información
 
 ## TEMPLATE ENGINE
+
+- 
