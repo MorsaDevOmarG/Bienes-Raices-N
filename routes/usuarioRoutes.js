@@ -13,8 +13,15 @@ const router = express.Router();
 //   res.json({ mensaje: "Usando Post en el servidor" });
 // });
 
-router.get("/", (req, res) => {
-  res.send("Hola Mundo en Express desde Routing");
+// router.get("/", (req, res) => {
+//   res.send("Hola Mundo en Express desde Routing");
+// });
+
+// Render: se encarga de mostrar una vista, no es necesario poner: views, render se encargar de escanear la carpeta views
+router.get("/login", (req, res) => {
+  res.render("auth/login", {
+    pagina: "Login",
+  });
 });
 
 // router.post("/", (req, res) => {

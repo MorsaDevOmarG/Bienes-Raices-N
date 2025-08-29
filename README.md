@@ -30,6 +30,9 @@
   - ## Desventajas
     - C_uando mostramos información con un template engine, esta información y sus interacciones no son muy dinámicas a comparación de _React o Vue_.
     - Consumen más recursos ya que el código _HTML_ es creado por el servidor a diferencia de: _Vue o React_ donde es creado por el cliente (navegador).
+  - PUG
+    - **_npm i pug_**
+    
 
 
 ### Creando proyecto
