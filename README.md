@@ -32,7 +32,35 @@
     - Consumen más recursos ya que el código _HTML_ es creado por el servidor a diferencia de: _Vue o React_ donde es creado por el cliente (navegador).
   - PUG
     - **_npm i pug_**
-    
+  - MVC
+    - Son las iniciales de:
+      - **Model View Controller**
+      - Es un patrón de arquitectura de software que permite la separación de obligaciones de cada pieza de tu código.
+      - Enfatiza la separación de la lógica de programación con la presentación.
+    - ## Ventajas
+      - MVC no mejora el perfomance del código, tampoco da seguridad, pero tu código mantendrá un mejor orden y será fácil de mantener.
+      - En un grupo de trabajo, el tener el código ordenado permite que más de una persona pueda entender que es lo que hace cada parte de él.
+      - Aprender _MVC_, hará que otras tecnologías como: _Laravel, Nests, Rails, Django, Net Core, Spring Boot_, te sean más sencillas de aprender.
+    - Model
+      - Model / Modelo
+      - Encargado de todas las interacciones en la base de datos, obtener datos, actualizarlos y eliminar.
+      - El modelo se encarga de consultar una base de datos, obtiene la información pero no la muestra, eso es trabajo de la vista.
+      - El modelo tampoco se encarga de actualizar la información directamente, es el **Controlador** quien decide cuándo llamarlo.
+    - View
+      - View / Vista
+      - Se ebcarga de todo lo que se ven en pantalla (HTML).
+      - Node soporte múltiples _Template Engine_ como: **EJS, PUG, HANDLEBARS**.
+      - Si utilizas _React, Vue, Angular, Svelte_, estos serían tu vista.
+      - El modelo consulta la base de datos, pero es por medio del **Controlador** que se decide que _Vista_ hay que llamar y que datos presentar.
+    - Controller  
+      - Controller / Controlador
+      - Es el que comunica el **Modelo y la Vista**, antes de que el _Modelo_ consulta la base de datos, el _Controlador_ es el encargado de llamar un _Modelo_ en específico.
+      - Una vez consultado el _Modelo_, el **Controlador** recibe esa información, manda a llamar la vista y le pasa la información.
+      - El **Controlador** es el que manda llamar la vista y modelos que se requieren en cada parte de tu aplicación.
+    - Router
+      - Es el encargado de registrar todas las _URL'S_ o _Endpoints_ que se va a soportar nuestra aplicación.
+      - Ejemplo: Si el Usuario accede a: **/clientes**, el routes ya tiene registrada esa ruta y un controlador con una función que sabe que que _Modelo_ debe llamar y que _Vista_ mostrar cuando el suuario visia esa _URL_.
+  - 
 
 
 ### Creando proyecto
