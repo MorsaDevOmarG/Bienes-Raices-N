@@ -60,6 +60,29 @@
     - Router
       - Es el encargado de registrar todas las _URL'S_ o _Endpoints_ que se va a soportar nuestra aplicación.
       - Ejemplo: Si el Usuario accede a: **/clientes**, el routes ya tiene registrada esa ruta y un controlador con una función que sabe que que _Modelo_ debe llamar y que _Vista_ mostrar cuando el suuario visia esa _URL_.
+  - TailwindCSS
+    - **_npm i -D tailwindcss_**
+    - **NOTA**: para este proyecto **INSTALA VERSIÓN 3**
+    - También debemos instalar lo siguiente:
+    - Autoprefixer
+      - **_npm i -D autoprefixer_**
+    - Postcss
+      - **_npm i -D postcss_**
+    - Potscss-CLI
+      - **_npm i -D postcss-cli_**
+    - Después de instalar **TAILWINDCSS**, debemos ejecutar:
+      - **_npx tailwindcss init -p_**
+      - Debemos configurar el archivo:
+        - **taildincss.config**: 
+          - _content: ['./views/**/*.pug', './public/**/*.js'],_
+      - En: **package.json**, debemos crear una línea nueva en: _scripts_
+        - **_"css" : "postcss public/css/tailwind.css -o public/css/app.css"_**
+        - Esto va compilar el código _css / taildindcss_ en un archivo nuevo: _app.css_
+      - Después ejecutamos:
+        - **_npm run css_**
+        - Si marca error, debemos renombrar 2 archivos:
+          - **tailwindcss.config.js** -> **_tailwindcss.config.cjs_**
+          - **postcss.config.js** -> **_postcss.config.cjs_**
   - 
 
 
