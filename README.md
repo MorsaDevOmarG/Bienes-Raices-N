@@ -80,10 +80,16 @@
         - Esto va compilar el código _css / taildindcss_ en un archivo nuevo: _app.css_
       - Después ejecutamos:
         - **_npm run css_**
+        - **NOTA**: cada vez que agregamos una clase nueva, debemos ejecutar el comando...!!!
+        - Para que no suceda eso, agregamos: **--watch**
+          - **_"css" : "postcss public/css/tailwind.css -o public/css/app.css --watch"_**
         - Si marca error, debemos renombrar 2 archivos:
           - **tailwindcss.config.js** -> **_tailwindcss.config.cjs_**
           - **postcss.config.js** -> **_postcss.config.cjs_**
-  - 
+      - Debemos instalar 2 extensiones en _VSC_:
+        - **pug** - amandeepmittal
+        - **tailwindcss** - tailwindcss labs
+  -
 
 
 ### Creando proyecto
@@ -126,7 +132,7 @@
     ```
     - Para mandarlos a llamar, ejecutamos:
       - **_npm run start_**
-  - Instalamos una dependencia de desarrollo para que reinicie el servidor cada vez que tenemos cambios: en archivos **.JS**
+  - Instalamos **NODEMON** como dependencia de desarrollo para que reinicie el servidor cada vez que tenemos cambios: en archivos **.JS**
     - **_npm i -D nodemon_**
   - Para hacer uso de: _nodemon_
     -  ````
