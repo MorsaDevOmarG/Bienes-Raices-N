@@ -1,5 +1,5 @@
 import express from "express";
-import { formularioLogin, formularioRegistro } from "../controllers/usuarioController.js";
+import { formularioLogin, formularioRegistro, formularioOlvidePassword } from "../controllers/usuarioController.js";
 
 const router = express.Router();
 
@@ -21,6 +21,7 @@ const router = express.Router();
 // Render: se encarga de mostrar una vista, no es necesario poner: views, render se encargar de escanear la carpeta views
 router.get("/login", formularioLogin);
 router.get("/registro", formularioRegistro);
+router.get("/olvide-password", formularioOlvidePassword);
 
 // router.post("/", (req, res) => {
 //   res.json({ mensaje: "Usando Post en el servidor" });
