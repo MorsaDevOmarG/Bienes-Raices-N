@@ -109,7 +109,12 @@
     - Creamos la BD:
       - **_mysql-u root -p_**
       - CREATE DATABASE bienesraices_node_mvc;
-    
+- ENV
+  - **_npm i dotenv_**
+  - Después de la instalación creamos el archivo:
+    - **.env**
+    - Ahí pondremos las variables de ENTORNO para que al subirlas a un repositorio no sean vistas, esto ayuda a mantener mayor seguridad.
+    - 
 
 ### Creando proyecto
 

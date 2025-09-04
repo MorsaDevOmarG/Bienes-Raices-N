@@ -8,7 +8,7 @@ const app = express();
 // Conectar a la base de datos
 try {
   await db.authenticate();
-  console.log("\nBase de datos conectada\n");
+  console.log("\nConexión exitosa a la Base de Datos...\n");
 } catch (error) {
   console.error("Error al conectar a la base de datos: ", error);
 }
