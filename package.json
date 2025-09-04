@@ -29,7 +29,9 @@
   },
   "dependencies": {
     "express": "^5.1.0",
-    "pug": "^3.0.3"
+    "mysql2": "^3.14.4",
+    "pug": "^3.0.3",
+    "sequelize": "^6.37.7"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.21",

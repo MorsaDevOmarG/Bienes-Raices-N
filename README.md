@@ -104,7 +104,12 @@
     - Ejemplos de **ORM'S**:
       - _Prima, Mongoose, TypeORM, Bookshelf.js, Sequelize_ 
       - Este último usaremos en este proyecto.
-    -
+    - Instalación del _ORM_:
+      - **_npm i sequelize mysql2_**
+    - Creamos la BD:
+      - **_mysql-u root -p_**
+      - CREATE DATABASE bienesraices_node_mvc;
+    
 
 ### Creando proyecto
 
