@@ -5,6 +5,12 @@ import db from "./config/db.js";
 // Crear la app
 const app = express();
 
+// Habilitar lectura de datos de formularios
+// También puede aparecer como BODYPARSER, solo cambiamos a: express
+// app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
+
+
 // Conectar a la base de datos
 try {
   await db.authenticate();
