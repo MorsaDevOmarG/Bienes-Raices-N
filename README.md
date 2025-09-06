@@ -114,7 +114,8 @@
   - Después de la instalación creamos el archivo:
     - **.env**
     - Ahí pondremos las variables de ENTORNO para que al subirlas a un repositorio no sean vistas, esto ayuda a mantener mayor seguridad.
-    - 
+- EXPRESS VALIDATOR
+  - **_npm i express-validator_**
 
 ### Creando proyecto
 
