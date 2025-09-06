@@ -19,6 +19,102 @@
     - Manejo de errores
     - Soporte de template engines
     - En caso de necesitar algo extra, se puede instalar con NPM
+- Template Engine
+  - Motores de plantilla, son tecnologías que nos permiten crear el código _HTML_ y mostrar información contenida en variables de una forma mpas compacta y clara.
+  - _Pug, Handlebars, EJS_ son las opciones más polulares para **Node.js**.
+  - También es posible utilizar _React, Angular, Svelte o Vue_ como tu Templa Engine; pero necesitarás crear una **API** con respuestas _JSON_.
+  - ## Ventjas
+    - La forma en que se crea el código _HTML_ tiene a ser más simple.
+    - Puede utilizar e imprimir información del servidor o base de datos de una forma más sencilla.
+    - La seguridad es más sencilla de implementar ya que la información es renderizada por el mismo servidor.
+  - ## Desventajas
+    - C_uando mostramos información con un template engine, esta información y sus interacciones no son muy dinámicas a comparación de _React o Vue_.
+    - Consumen más recursos ya que el código _HTML_ es creado por el servidor a diferencia de: _Vue o React_ donde es creado por el cliente (navegador).
+- PUG
+  - **_npm i pug_**
+- MVC
+  - Son las iniciales de:
+    - **Model View Controller**
+    - Es un patrón de arquitectura de software que permite la separación de obligaciones de cada pieza de tu código.
+    - Enfatiza la separación de la lógica de programación con la presentación.
+  - ## Ventajas
+    - MVC no mejora el perfomance del código, tampoco da seguridad, pero tu código mantendrá un mejor orden y será fácil de mantener.
+    - En un grupo de trabajo, el tener el código ordenado permite que más de una persona pueda entender que es lo que hace cada parte de él.
+    - Aprender _MVC_, hará que otras tecnologías como: _Laravel, Nests, Rails, Django, Net Core, Spring Boot_, te sean más sencillas de aprender.
+  - Model
+    - Model / Modelo
+    - Encargado de todas las interacciones en la base de datos, obtener datos, actualizarlos y eliminar.
+    - El modelo se encarga de consultar una base de datos, obtiene la información pero no la muestra, eso es trabajo de la vista.
+    - El modelo tampoco se encarga de actualizar la información directamente, es el **Controlador** quien decide cuándo llamarlo.
+  - View
+    - View / Vista
+    - Se ebcarga de todo lo que se ven en pantalla (HTML).
+    - Node soporte múltiples _Template Engine_ como: **EJS, PUG, HANDLEBARS**.
+    - Si utilizas _React, Vue, Angular, Svelte_, estos serían tu vista.
+    - El modelo consulta la base de datos, pero es por medio del **Controlador** que se decide que _Vista_ hay que llamar y que datos presentar.
+  - Controller  
+    - Controller / Controlador
+    - Es el que comunica el **Modelo y la Vista**, antes de que el _Modelo_ consulta la base de datos, el _Controlador_ es el encargado de llamar un _Modelo_ en específico.
+    - Una vez consultado el _Modelo_, el **Controlador** recibe esa información, manda a llamar la vista y le pasa la información.
+    - El **Controlador** es el que manda llamar la vista y modelos que se requieren en cada parte de tu aplicación.
+  - Router
+    - Es el encargado de registrar todas las _URL'S_ o _Endpoints_ que se va a soportar nuestra aplicación.
+    - Ejemplo: Si el Usuario accede a: **/clientes**, el routes ya tiene registrada esa ruta y un controlador con una función que sabe que que _Modelo_ debe llamar y que _Vista_ mostrar cuando el suuario visia esa _URL_.
+- TailwindCSS
+  - **_npm i -D tailwindcss_**
+  - **NOTA**: para este proyecto **INSTALA VERSIÓN 3**
+  - También debemos instalar lo siguiente:
+  - Autoprefixer
+    - **_npm i -D autoprefixer_**
+  - Postcss
+    - **_npm i -D postcss_**
+  - Potscss-CLI
+    - **_npm i -D postcss-cli_**
+  - Después de instalar **TAILWINDCSS**, debemos ejecutar:
+    - **_npx tailwindcss init -p_**
+    - Debemos configurar el archivo:
+      - **taildincss.config**: 
+        - _content: ['./views/**/*.pug', './public/**/*.js'],_
+    - En: **package.json**, debemos crear una línea nueva en: _scripts_
+      - **_"css" : "postcss public/css/tailwind.css -o public/css/app.css"_**
+      - Esto va compilar el código _css / taildindcss_ en un archivo nuevo: _app.css_
+    - Después ejecutamos:
+      - **_npm run css_**
+      - **NOTA**: cada vez que agregamos una clase nueva, debemos ejecutar el comando...!!!
+      - Para que no suceda eso, agregamos: **--watch**
+        - **_"css" : "postcss public/css/tailwind.css -o public/css/app.css --watch"_**
+      - Si marca error, debemos renombrar 2 archivos:
+        - **tailwindcss.config.js** -> **_tailwindcss.config.cjs_**
+        - **postcss.config.js** -> **_postcss.config.cjs_**
+    - Debemos instalar 2 extensiones en _VSC_:
+      - **pug** - amandeepmittal
+      - **tailwindcss** - tailwindcss labs
+- ORM
+  - Object Relational Mapper
+  - Es una técnica que se utiliza donde los datos de una base de datos son tratados como **OBJETOS**, utilizando un paradigma de programación _Orientada a Objetos_.
+  - _Node.js_ tiene una gran cantidad de: **ORM'S** que se instalan como librería.
+  - En _MVC_, es donde un **ORM** se relaciona bastante con el: **MODELO**.
+  - ## Ventajas
+    - Comenzar a crear aplicaciones que utilicen base de datos, sin necesidad de escribir código _SQL_ y tampoco saber sobre modelado de base de datos.
+    - Velocidad en desarrollo ya que tienen una gran cantidad de métodos para: **crear, listar, actualizar o eliminar** datos.
+    - La mayoría cuentan con todas las medidas de seguridad.
+    - Ejemplo:
+      - **SQL** : INSERT INTO 'categorias' ('nombre') VALUES ('Casa');
+      - **ORM**: Categoria.create({nombre: 'Casa'});
+    - Ejemplos de **ORM'S**:
+      - _Prima, Mongoose, TypeORM, Bookshelf.js, Sequelize_ 
+      - Este último usaremos en este proyecto.
+    - Instalación del _ORM_:
+      - **_npm i sequelize mysql2_**
+    - Creamos la BD:
+      - **_mysql-u root -p_**
+      - CREATE DATABASE bienesraices_node_mvc;
+- ENV
+  - **_npm i dotenv_**
+  - Después de la instalación creamos el archivo:
+    - **.env**
+    - Ahí pondremos las variables de ENTORNO para que al subirlas a un repositorio no sean vistas, esto ayuda a mantener mayor seguridad.
+    - 
 
 ### Creando proyecto
 
@@ -58,9 +154,9 @@
           "start": "node index.js"
         },
     ```
-  - Para mandarlos a llamar, ejecutamos:
-    - **_npm run start_**
-  - Instalamos una dependencia de desarrollo para que reinicie el servidor cada vez que tenemos cambios: en archivos **.JS**
+    - Para mandarlos a llamar, ejecutamos:
+      - **_npm run start_**
+  - Instalamos **NODEMON** como dependencia de desarrollo para que reinicie el servidor cada vez que tenemos cambios: en archivos **.JS**
     - **_npm i -D nodemon_**
   - Para hacer uso de: _nodemon_
     -  ````
@@ -71,6 +167,8 @@
     ```
   - Si creamos o tenemos _EXPRESS_ con la versión antigua: **COMMON**, en el _package.json_ en: **type**, aparecerá: _COMMON_, pero si vamos a usar la nueva sintaxis debemos cambiarlo por: 
     - **"type": "module"**
+  - **NOTA**
+    - Si subimos el proyecto a _GIT HUB_ y se clona en otra computadora, recordemos no trae el: _NODE MODULES_, para ello solo ejecutamos: **npm install**, como recomendación tendríamos que ejecutarlo con la versión en la que se uso el proyecto, este proyecto usa: **_NODE V.22.18.0_**
 
 #### Dependencias
 
@@ -102,4 +200,7 @@
   - Utilizado para actualizar información
 - **DELETE**
   - Utilizado para eliminar información
+
+## TEMPLATE ENGINE
+
 - 

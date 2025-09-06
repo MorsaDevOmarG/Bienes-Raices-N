@@ -1,0 +1,40 @@
+extends ../layout/index
+
+block contenido
+
+  //- div 
+    //- Formas de agregar clases o ids
+    //- h2.text-center Login
+    //- h2(class="text-center") Login
+    //- h2(id="text-center") Login
+    //- h2#text-center Login
+
+    //- Formas de agregar variables
+    //- if  autenticado
+    //-   p Usuario autenticado
+    //- else
+    //-   p Inicia sesión
+  
+  div.py-10
+    h1.text-4xl.my-10.font-extrabold.text-center Bienes
+      span.font-normal Raíces
+    h2.text-center.text-2xl.font-extrabold= pagina
+
+    //- Sino agregamos el DIV y solo ponemos la clase, automáticamente se crea el DIV
+    .mt-8.mx-auto.max-w-md
+      .bg-white.py-8.px-4.shadow
+        //- Esta clase, la del (FORM), afecta a los hijos directos, no a los nietos, en este caso los DIV
+        form.space-y-5 
+          div
+            label.block.text-sm.uppercase.text-gray-500.mb-2.font-bold(for="email") Email de Registro
+            input#email.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Tu email", type="email", name="email")
+
+          div
+            label.block.text-sm.uppercase.text-gray-500.mb-2.font-bold(for="password") Password
+            input#password.w-full.px-3.py-2.border.border-gray-300.rounded-md.placeholder-gray-400(placeholder="Tu password", type="password", name="password")
+
+          div.flex.items-center.justify-between
+            a(href="/auth/registro" class="text-gray-500 text-xs ") ¿No tienes cuenta? Crea una 
+            a(href="/auth/olvide-password" class="text-gray-500 text-xs ") Olvide mi Password
+
+          input(type="submit" value=pagina class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 cursor-pointer")
