@@ -1,6 +1,7 @@
 import { check, validationResult } from "express-validator";
 
 import Usuario from "../models/Usuario.js";
+import { where } from "sequelize";
 
 const formularioLogin = (req, res) => {
   res.render("auth/login", {
@@ -53,6 +54,31 @@ const registrar = async (req, res) => {
       },
     });
   }
+
+  const { nombre, email, password } = req.body;
+
+  // Verificar que el usuario no esté registrado o duplicado, finOne: busca el primero que encuentre, esta es una forma, la de aquí abajo, pero hay una mejor cuando aplicamos destructuración
+  // const existeUusuario = await Usuario.findOne({
+  //   where: { email: req.body.email },
+  // });
+
+  const existeUusuario = await Usuario.findOne({ where: { email } });
+
+  console.log(existeUusuario);
+
+  if (existeUusuario) {
+    return res.render("auth/registro", {
+      pagina: "Crear Cuenta",
+      errores: [{ msg: "El usuario ya está registrado" }],
+      // Con esto hacemos que si ingresamos datos y hay un error, no se borren los datos que ya habíamos ingresado
+      usuario: {
+        nombre: req.body.nombre,
+        email: req.body.email,
+      },
+    });
+  }
+
+  return;
 
   const usuario = await Usuario.create(req.body);
 
