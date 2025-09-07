@@ -115,7 +115,11 @@
     - **.env**
     - Ahí pondremos las variables de ENTORNO para que al subirlas a un repositorio no sean vistas, esto ayuda a mantener mayor seguridad.
 - EXPRESS VALIDATOR
+  - Ayuda a aplicar validaciones
   - **_npm i express-validator_**
+- BCRYPT
+  - Hashea los _PASSWORD_
+  - **_npm i bcrypt_**
 
 ### Creando proyecto
 

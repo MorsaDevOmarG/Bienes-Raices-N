@@ -78,11 +78,18 @@ const registrar = async (req, res) => {
     });
   }
 
-  return;
+  // Almacenar un usuario
+  // const usuario = await Usuario.create(req.body);
+  // res.json(usuario);
 
-  const usuario = await Usuario.create(req.body);
-
-  res.json(usuario);
+  await Usuario.create(
+    {
+      nombre,
+      email,
+      password,
+      token: 123
+    }
+  );
 };
 
 const formularioOlvidePassword = (req, res) => {

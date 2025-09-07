@@ -1,6 +1,6 @@
 import { DataTypes } from 'sequelize';
+import bcrypt from 'bcrypt';
 import db from '../config/db.js';
-import e from 'express';
 
 // Nombre de la tabla que se va crear (Usuarios)
 const Usuario = db.define('usuarios', {
@@ -23,6 +23,15 @@ const Usuario = db.define('usuarios', {
   confirmado: {
     type: DataTypes.BOOLEAN,
     defaultValue: false
+  }
+}, {
+  hooks: {
+    beforeCreate: async function (usuario) {
+      // Es recomendanble usar 10, si ponemos 100 o 200, tarda mucho en hashear y es más costoso para el SERVER
+      const salt = await bcrypt.genSalt(10);
+
+      usuario.password = await bcrypt.hash(usuario.password, salt);
+    }
   }
 });
 
