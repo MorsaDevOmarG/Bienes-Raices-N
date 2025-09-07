@@ -34,7 +34,7 @@ const registrar = async (req, res) => {
     .withMessage("El Password debe ser al menos de 6 caracteres")
     .run(req);
   await check("repetir_password")
-    .equals('password')
+    .equals("password")
     .withMessage("Los passwords no son iguales")
     .run(req);
 
@@ -46,6 +46,11 @@ const registrar = async (req, res) => {
     return res.render("auth/registro", {
       pagina: "Crear Cuenta",
       errores: resultado.array(),
+      // Con esto hacemos que si ingresamos datos y hay un error, no se borren los datos que ya habíamos ingresado
+      usuario: {
+        nombre: req.body.nombre,
+        email: req.body.email,
+      },
     });
   }
 
