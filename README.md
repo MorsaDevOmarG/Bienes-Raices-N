@@ -120,6 +120,15 @@
 - BCRYPT
   - Hashea los _PASSWORD_
   - **_npm i bcrypt_**
+- NODEMAILER
+  - Envío de e-mails
+    - **_npm i nodemailer_**
+- MAILTRAP
+  - Envío de correos
+  - https://mailtrap.io/
+  - En este caso seleccionamos la opción de:
+    - _Node.js_
+  
 
 ### Creando proyecto
 
