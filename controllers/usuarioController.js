@@ -2,6 +2,7 @@ import { check, validationResult } from "express-validator";
 
 import Usuario from "../models/Usuario.js";
 import { generarId } from "../helpers/tokens.js"; 
+import { emailRegistro } from "../helpers/emails.js";
 
 const formularioLogin = (req, res) => {
   res.render("auth/login", {
@@ -82,7 +83,7 @@ const registrar = async (req, res) => {
   // const usuario = await Usuario.create(req.body);
   // res.json(usuario);
 
-  await Usuario.create(
+  const usuario = await Usuario.create(
     {
       nombre,
       email,
@@ -90,6 +91,13 @@ const registrar = async (req, res) => {
       token: generarId()
     }
   );
+
+  // Enviar el email de confirmación
+  emailRegistro({
+    nombre: usuario.nombre,
+    email: usuario.email,
+    token: usuario.token
+  });
 
   // Mostrar mensaje de confirmación
   res.render("templates/mensaje", {
