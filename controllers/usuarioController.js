@@ -128,6 +128,7 @@ const confirmar = async (req, res, next) => {
     });
   }
 
+  // Confirmarla cuenta
   usuario.token = null;
   usuario.confirmado = true;
   await usuario.save();
