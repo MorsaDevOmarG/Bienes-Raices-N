@@ -1,4 +1,7 @@
 import express from "express";
+import csurf from "csurf";
+import cookieParser from "cookie-parser";
+
 import usuarioRoutes from "./routes/usuarioRoutes.js";
 import db from "./config/db.js";
 
@@ -10,6 +13,11 @@ const app = express();
 // app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.urlencoded({ extended: true }));
 
+// Habilitar cookie-parser
+app.use(cookieParser());
+
+// Habuilitar CSURF
+app.use(csurf({ cookie: true }));
 
 // Conectar a la base de datos
 try {

@@ -128,7 +128,9 @@
   - https://mailtrap.io/
   - En este caso seleccionamos la opción de:
     - _Node.js_
-  
+- CSURF
+  - Sirve para realizar validaciones (CSFR), librería para _EXPRESS.JS_
+  - **_npm i csurf cookie-parser_**
 
 ### Creando proyecto
 

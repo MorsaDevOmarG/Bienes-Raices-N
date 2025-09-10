@@ -11,8 +11,11 @@ const formularioLogin = (req, res) => {
 };
 
 const formularioRegistro = (req, res) => {
+  // console.log(req.csrfToken());
+
   res.render("auth/registro", {
     pagina: "Crear Cuenta",
+    csrfToken: req.csrfToken(), // Pasamos el token a la vista
   });
 };
 
@@ -47,6 +50,7 @@ const registrar = async (req, res) => {
     // Errores
     return res.render("auth/registro", {
       pagina: "Crear Cuenta",
+      csrfToken: req.csrfToken(), // Pasamos el token a la vista
       errores: resultado.array(),
       // Con esto hacemos que si ingresamos datos y hay un error, no se borren los datos que ya habíamos ingresado
       usuario: {
@@ -70,6 +74,7 @@ const registrar = async (req, res) => {
   if (existeUusuario) {
     return res.render("auth/registro", {
       pagina: "Crear Cuenta",
+      csrfToken: req.csrfToken(), // Pasamos el token a la vista
       errores: [{ msg: "El usuario ya está registrado" }],
       // Con esto hacemos que si ingresamos datos y hay un error, no se borren los datos que ya habíamos ingresado
       usuario: {
