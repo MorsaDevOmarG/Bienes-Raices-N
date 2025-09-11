@@ -1,7 +1,8 @@
 import { check, validationResult } from "express-validator";
+import bcrypt from "bcrypt";
 
 import Usuario from "../models/Usuario.js";
-import { generarId } from "../helpers/tokens.js"; 
+import { generarId } from "../helpers/tokens.js";
 import { emailRegistro, emailOlvidePassword } from "../helpers/emails.js";
 
 const formularioLogin = (req, res) => {
@@ -88,20 +89,18 @@ const registrar = async (req, res) => {
   // const usuario = await Usuario.create(req.body);
   // res.json(usuario);
 
-  const usuario = await Usuario.create(
-    {
-      nombre,
-      email,
-      password,
-      token: generarId()
-    }
-  );
+  const usuario = await Usuario.create({
+    nombre,
+    email,
+    password,
+    token: generarId(),
+  });
 
   // Enviar el email de confirmación
   emailRegistro({
     nombre: usuario.nombre,
     email: usuario.email,
-    token: usuario.token
+    token: usuario.token,
   });
 
   // Mostrar mensaje de confirmación
@@ -190,7 +189,7 @@ const resetPassword = async (req, res) => {
   emailOlvidePassword({
     email: usuario.email,
     nombre: usuario.nombre,
-    token: usuario.token
+    token: usuario.token,
   });
 
   // Renderizar un mensaje
@@ -209,7 +208,7 @@ const comprobarToken = async (req, res) => {
     return res.render("auth/confirmar-cuenta", {
       pagina: "Reestablece tu Password",
       mensaje: "Hubo un error al validar tu información, intenta de nuevo",
-      error: true
+      error: true,
     });
   }
 
@@ -221,7 +220,43 @@ const comprobarToken = async (req, res) => {
 };
 
 const nuevoPassword = async (req, res) => {
-  console.log("Guardando Password...");
+  // console.log("Guardando Password...");
+  // Validación quien hace el cambio
+  await check("password")
+    .isLength({ min: 6 })
+    .withMessage("El Password debe ser al menos de 6 caracteres")
+    .run(req);
+
+  let resultado = validationResult(req);
+
+  // Verificar que el resultado esté vacío
+  if (!resultado.isEmpty()) {
+    // Errores
+    return res.render("auth/reset-password", {
+      pagina: "Reestablece tu Password",
+      csrfToken: req.csrfToken(),
+      errores: resultado.array(),
+    });
+  }
+
+  const { token } = req.params;
+  const { password } = req.body;
+
+  // Identificar quien hace el cambio
+  const usuario = await Usuario.findOne({ where: { token } });
+
+  // Hasgear el nuevo password
+  const salt = await bcrypt.genSalt(10);
+
+  usuario.password = await bcrypt.hash(usuario.password, salt);
+  usuario.token = null;
+
+  await usuario.save();
+
+  res.render("auth/confirmar-cuenta", {
+    pagina: "Password Reestablecido",
+    mensaje: "El password se guardó correctamente",
+  });
 };
 
 export {
@@ -232,5 +267,5 @@ export {
   formularioOlvidePassword,
   resetPassword,
   comprobarToken,
-  nuevoPassword
+  nuevoPassword,
 };
