@@ -5,6 +5,7 @@ import {
   registrar,
   confirmar,
   formularioOlvidePassword,
+  resetPassword
 } from "../controllers/usuarioController.js";
 
 const router = express.Router();
@@ -33,6 +34,7 @@ router.post("/registro", registrar);
 router.get("/confirmar/:token", confirmar);
 
 router.get("/olvide-password", formularioOlvidePassword);
+router.post("/olvide-password", resetPassword);
 
 // router.post("/", (req, res) => {
 //   res.json({ mensaje: "Usando Post en el servidor" });

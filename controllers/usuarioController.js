@@ -147,8 +147,29 @@ const confirmar = async (req, res, next) => {
 const formularioOlvidePassword = (req, res) => {
   res.render("auth/olvide-password", {
     pagina: "Recupera tu acceso a Bienes Raíces",
+    csrfToken: req.csrfToken(),
   });
 };
+
+const resetPassword = async (req, res) => {
+  // Validación
+  await check("email")
+    .isEmail()
+    .withMessage("El Email debe ser válido")
+    .run(req);
+
+  let resultado = validationResult(req);
+
+  // Verificar que el resultado esté vacío
+  if (!resultado.isEmpty()) {
+    // Errores
+    return res.render("auth/olvide-password", {
+      pagina: "Recupera tu acceso a Bienes Raíces",
+      csrfToken: req.csrfToken(),
+      errores: resultado.array(),
+    });
+  }
+};  
 
 export {
   formularioLogin,
@@ -156,4 +177,5 @@ export {
   registrar,
   confirmar,
   formularioOlvidePassword,
+  resetPassword
 };
