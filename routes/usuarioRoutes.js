@@ -5,7 +5,9 @@ import {
   registrar,
   confirmar,
   formularioOlvidePassword,
-  resetPassword
+  resetPassword,
+  comprobarToken,
+  nuevoPassword
 } from "../controllers/usuarioController.js";
 
 const router = express.Router();
@@ -28,14 +30,6 @@ const router = express.Router();
 // Render: se encarga de mostrar una vista, no es necesario poner: views, render se encargar de escanear la carpeta views
 router.get("/login", formularioLogin);
 
-router.get("/registro", formularioRegistro);
-router.post("/registro", registrar);
-
-router.get("/confirmar/:token", confirmar);
-
-router.get("/olvide-password", formularioOlvidePassword);
-router.post("/olvide-password", resetPassword);
-
 // router.post("/", (req, res) => {
 //   res.json({ mensaje: "Usando Post en el servidor" });
 // });
@@ -49,5 +43,17 @@ router.post("/olvide-password", resetPassword);
 //   .post("/", function (req, res) {
 //     res.json({ mensaje: "Usando Post en el servidor" });
 //   });
+
+router.get("/registro", formularioRegistro);
+router.post("/registro", registrar);
+
+router.get("/confirmar/:token", confirmar);
+
+router.get("/olvide-password", formularioOlvidePassword);
+router.post("/olvide-password", resetPassword);
+
+// Almacenar el nuevo password
+router.get("/olvide-password/:token", comprobarToken);
+router.post("/olvide-password/:token", nuevoPassword);
 
 export default router;

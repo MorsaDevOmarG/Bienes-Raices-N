@@ -2,7 +2,7 @@ import { check, validationResult } from "express-validator";
 
 import Usuario from "../models/Usuario.js";
 import { generarId } from "../helpers/tokens.js"; 
-import { emailRegistro } from "../helpers/emails.js";
+import { emailRegistro, emailOlvidePassword } from "../helpers/emails.js";
 
 const formularioLogin = (req, res) => {
   res.render("auth/login", {
@@ -181,7 +181,32 @@ const resetPassword = async (req, res) => {
       errores: [{ msg: "El Email no pertenece a ningún usuario" }],
     });
   }
-};  
+
+  // Generar un token y enviar el email
+  usuario.token = generarId();
+  await usuario.save();
+
+  // Enviar el email
+  emailOlvidePassword({
+    email: usuario.email,
+    nombre: usuario.nombre,
+    token: usuario.token
+  });
+
+  // Renderizar un mensaje
+  res.render("templates/mensaje", {
+    pagina: "Reestablece tu Password",
+    mensaje: "Hemos enviado un email con las instrucciones",
+  });
+};
+
+const comprobarToken = async (req, res, next) => {
+  next();
+};
+
+const nuevoPassword = async (req, res) => {
+
+}
 
 export {
   formularioLogin,
@@ -189,5 +214,7 @@ export {
   registrar,
   confirmar,
   formularioOlvidePassword,
-  resetPassword
+  resetPassword,
+  comprobarToken,
+  nuevoPassword
 };
