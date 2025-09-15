@@ -131,6 +131,13 @@
 - CSURF
   - Sirve para realizar validaciones (CSFR), librería para _EXPRESS.JS_
   - **_npm i csurf cookie-parser_**
+- JWT (Json Web Token)
+  - Sirve para autenticar
+  - Opciones:
+    - **keycloak, passpor, jsonwebtoken**
+  - Debuguear y probar _JWT_
+    - [JWT](https://www.jwt.io/)
+  -
 
 ### Creando proyecto
 
