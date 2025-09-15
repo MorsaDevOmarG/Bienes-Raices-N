@@ -137,6 +137,7 @@
     - **keycloak, passpor, jsonwebtoken**
   - Debuguear y probar _JWT_
     - [JWT](https://www.jwt.io/)
+  - **_npm i jsonwebtoken_**
   -
 
 ### Creando proyecto

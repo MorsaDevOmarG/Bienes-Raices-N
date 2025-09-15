@@ -1,5 +1,6 @@
 import { check, validationResult } from "express-validator";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 import Usuario from "../models/Usuario.js";
 import { generarId } from "../helpers/tokens.js";
@@ -69,7 +70,14 @@ const autenticar = async (req, res) => {
   }
 
   // Autenticar el usuario
-  
+  const token = jwt.sign(
+    {
+      nombre: 'Json',
+      empresa: 'Bienes Raices',
+      tecnologias: 'Node.js'
+    }, "palabarasupersecreta", { expiresIn: "1d" }
+  );
+  console.log(token);
 };
 
 const formularioRegistro = (req, res) => {
