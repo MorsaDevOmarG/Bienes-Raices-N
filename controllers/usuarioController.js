@@ -3,7 +3,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 import Usuario from "../models/Usuario.js";
-import { generarId } from "../helpers/tokens.js";
+import { generarJWT, generarId } from "../helpers/tokens.js";
 import { emailRegistro, emailOlvidePassword } from "../helpers/emails.js";
 
 const formularioLogin = (req, res) => {
@@ -70,13 +70,15 @@ const autenticar = async (req, res) => {
   }
 
   // Autenticar el usuario
-  const token = jwt.sign(
-    {
-      nombre: 'Json',
-      empresa: 'Bienes Raices',
-      tecnologias: 'Node.js'
-    }, "palabarasupersecreta", { expiresIn: "1d" }
-  );
+  // const token = jwt.sign(
+  //   {
+  //     nombre: 'Json',
+  //     empresa: 'Bienes Raices',
+  //     tecnologias: 'Node.js'
+  //   }, "palabarasupersecreta", { expiresIn: "1d" }
+  // );
+
+  const token = generarJWT(id: usuario.id, nombre: usuario.nombre);
   console.log(token);
 };
 
