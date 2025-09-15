@@ -8,7 +8,56 @@ import { emailRegistro, emailOlvidePassword } from "../helpers/emails.js";
 const formularioLogin = (req, res) => {
   res.render("auth/login", {
     pagina: "Iniciar Sesión",
+    csrfToken: req.csrfToken(), // Pasamos el token a la vista
   });
+};
+
+const autenticar = async (req, res) => {
+  // console.log("Autenticando...");
+
+  // Validación
+  await check("email")
+    .isEmail()
+    .withMessage("El Email debe ser válido")
+    .run(req);
+  await check("password")
+    .notEmpty()
+    .withMessage("El Password no puede ir vacío")
+    .run(req);
+
+  let resultado = validationResult(req);
+
+  // Verificar que el resultado esté vacío
+  if (!resultado.isEmpty()) {
+    // Errores
+    return res.render("auth/login", {
+      pagina: "Iniciar Sesión",
+      csrfToken: req.csrfToken(), // Pasamos el token a la vista
+      errores: resultado.array(),
+    });
+  }
+
+  const { email, password } = req.body;
+
+  // Comprobar que el usuario exista
+  const usuario = await Usuario.findOne({ where: { email } });
+
+  if (!usuario) {
+    return res.render("auth/login", {
+      pagina: "Iniciar Sesión",
+      csrfToken: req.csrfToken(), // Pasamos el token a la vista
+      errores: [{ msg: "El usuario no existe" }],
+    });
+  }
+
+  // Comprobar si el usuario está confirmado
+  if (!usuario.confirmado) {
+    return res.render("auth/login", {
+      pagina: "Iniciar Sesión",
+      csrfToken: req.csrfToken(), // Pasamos el token a la vista
+      errores: [{ msg: "Tu cuenta no ha sido confirmada" }],
+    });
+  }
 };
 
 const formularioRegistro = (req, res) => {
@@ -261,6 +310,7 @@ const nuevoPassword = async (req, res) => {
 
 export {
   formularioLogin,
+  autenticar,
   formularioRegistro,
   registrar,
   confirmar,

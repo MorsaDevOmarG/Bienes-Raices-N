@@ -1,6 +1,7 @@
 import express from "express";
 import {
   formularioLogin,
+  autenticar,
   formularioRegistro,
   registrar,
   confirmar,
@@ -29,6 +30,7 @@ const router = express.Router();
 
 // Render: se encarga de mostrar una vista, no es necesario poner: views, render se encargar de escanear la carpeta views
 router.get("/login", formularioLogin);
+router.post("/login", autenticar);
 
 // router.post("/", (req, res) => {
 //   res.json({ mensaje: "Usando Post en el servidor" });
