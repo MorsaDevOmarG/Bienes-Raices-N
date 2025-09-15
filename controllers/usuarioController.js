@@ -54,7 +54,7 @@ const autenticar = async (req, res) => {
   if (!usuario.confirmado) {
     return res.render("auth/login", {
       pagina: "Iniciar Sesión",
-      csrfToken: req.csrfToken(), // Pasamos el token a la vista
+      csrfToken: req.csrfToken(),
       errores: [{ msg: "Tu cuenta no ha sido confirmada" }],
     });
   }
