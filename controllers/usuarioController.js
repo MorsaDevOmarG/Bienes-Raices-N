@@ -58,6 +58,15 @@ const autenticar = async (req, res) => {
       errores: [{ msg: "Tu cuenta no ha sido confirmada" }],
     });
   }
+
+  // Revisar el password
+  if (!usuario.verificarPassword(password)) {
+    return res.render("auth/login", {
+      pagina: "Iniciar Sesión",
+      csrfToken: req.csrfToken(),
+      errores: [{ msg: "El Password es incorrecto" }],
+    });
+  }
 };
 
 const formularioRegistro = (req, res) => {
