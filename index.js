@@ -3,6 +3,8 @@ import csurf from "csurf";
 import cookieParser from "cookie-parser";
 
 import usuarioRoutes from "./routes/usuarioRoutes.js";
+import propiedadesRoutes from "./routes/propiedadesRoutes.js";
+
 import db from "./config/db.js";
 
 // Crear la app
@@ -47,8 +49,11 @@ app.set("views", "./views");
 // Carpeta pública
 app.use(express.static("public"));
 
+// Routing
 // Todas las rutas que se encuentren en: auth, se van a encontrar en el archvio, en este ejemplo sería en: usuarioRoutes.js
 app.use("/auth", usuarioRoutes);
+
+app.use("/", propiedadesRoutes);
 
 // Definir un puerto
 // const port = 3000;
