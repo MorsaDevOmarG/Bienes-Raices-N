@@ -78,8 +78,17 @@ const autenticar = async (req, res) => {
   //   }, "palabarasupersecreta", { expiresIn: "1d" }
   // );
 
-  const token = generarJWT(id: usuario.id, nombre: usuario.nombre);
+  const token = generarJWT({ id: usuario.id, nombre: usuario.nombre });
   console.log(token);
+
+  // Almacenar en un cookie
+  return res
+    .cookie("_token", token, {
+      httpOnly: true, //Evita los ataques CSRF
+      //secure: true, // Solo se transmite por HTTPS, permite los COOKIES en conexiones seguras, se usa si utilizamos certificado SSL
+      //sameSite: true, // Protección contra CSRF
+    })
+    .redirect("/mis-propiedades");
 };
 
 const formularioRegistro = (req, res) => {
