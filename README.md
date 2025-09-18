@@ -138,7 +138,9 @@
   - Debuguear y probar _JWT_
     - [JWT](https://www.jwt.io/)
   - **_npm i jsonwebtoken_**
-  -
+- WEBPACK
+  - Compila archivos _JAVASCRIPT_ y los convierte en archivos estáticos.
+  - **_npm i webpack webpack-cli_**
 
 ### Creando proyecto
 
