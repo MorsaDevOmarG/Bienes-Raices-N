@@ -140,7 +140,15 @@
   - **_npm i jsonwebtoken_**
 - WEBPACK
   - Compila archivos _JAVASCRIPT_ y los convierte en archivos estáticos.
-  - **_npm i webpack webpack-cli_**
+  - **_npm i -D webpack webpack-cli_**
+- CONCURRENTLY
+  - Ejecuta varios comandos evitando tener tantas consolas abiertas y que cada ejecute cada cosa, por ejemplo: _SERVER, CSS, JS, .... etc...._
+  - **_npm i -D concurrently_**
+  - En el archivo de:
+    - **package.json**
+  - Agregamos la línea:
+    - _"dev": "concurrently \"npm run server\" \"npm run css\" \"npm run js\""_
+  - Con esto evitamos tener varias consolas abiertas.
 
 ### Creando proyecto
 
