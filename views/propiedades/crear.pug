@@ -1,5 +1,8 @@
 extends ../layout/index
 
+block styles
+  link(rel="stylesheet", href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css")
+
 block contenido
 
   div.py-10
@@ -53,6 +56,8 @@ block contenido
                 - var n = 1
                   while n < 5
                     option(value=n) #{n++}
+
+          #mapa.h-96
 
 //- leaflet: alternativa a GOOGLE MAPS, librería para mapas, Esri: librería que permite acceder a info de las calles cuando le pasas las coordenadas en conjunto de Geosearch
 block scripts
