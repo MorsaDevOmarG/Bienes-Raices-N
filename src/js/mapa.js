@@ -12,4 +12,26 @@
 
   // El PIN, draggable: para mover el PIN, autoPan: para que el mapa se mueva si el PIN llega a un borde, es decir; se vuelve a centrar
   marker = L.marker([lat, lng], { draggable: true, autoPan: true }).addTo(mapa);
+
+  // 🚀 Agregar buscador
+  L.Control.geocoder({
+    defaultMarkGeocode: false, // Para manejar manualmente lo que hace al seleccionar
+  })
+    .on("markgeocode", function (e) {
+      const bbox = e.geocode.bbox;
+      const poly = L.polygon([
+        bbox.getSouthEast(),
+        bbox.getNorthEast(),
+        bbox.getNorthWest(),
+        bbox.getSouthWest(),
+      ]).addTo(mapa);
+
+      // Centrar en el resultado
+      mapa.fitBounds(poly.getBounds());
+
+      // Mover marcador a la ubicación encontrada
+      const center = e.geocode.center;
+      marker.setLatLng(center);
+    })
+    .addTo(mapa);
 })();
