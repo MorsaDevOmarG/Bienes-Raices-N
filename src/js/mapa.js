@@ -5,6 +5,9 @@
   const mapa = L.map("mapa").setView([lat, lng], 16);
   let marker;
 
+  // Utilizar PROVIDER y GEOCODER
+  const geocodeService = L.esri.Geocoding.geocodeService();
+
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution:
       '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
@@ -19,6 +22,17 @@
     const posicion = marker.getLatLng(); // Obtener la posición del marcador
     mapa.panTo(new L.LatLng(posicion.lat, posicion.lng)); // Centrar el mapa en la nueva posición del marcador
     // console.log(posicion);
+
+    // Obtener la información de la calle al soltar el pin
+    geocodeService
+      .reverse()
+      .latlng(posicion, 16) // 16 es el nivel de precisión
+      .run(
+        function (error, resultado) {
+          // console.log(resultado);
+          marker.bindPopup(resultado.address.LongLabel); // Mostrar la dirección en un popup
+          marker.openPopup(); // Abrir el popup automáticamente
+        });
   });
 
   // 🚀 Agregar buscador
