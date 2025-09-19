@@ -32,6 +32,17 @@
           // console.log(resultado);
           marker.bindPopup(resultado.address.LongLabel); // Mostrar la dirección en un popup
           marker.openPopup(); // Abrir el popup automáticamente
+
+          // Llenar los campos
+          document.querySelector(".calle").textContent = resultado?.address?.Address ?? '';
+          document.querySelector("#calle").value = resultado?.address?.Address ?? '';
+          document.querySelector(".ciudad").textContent = resultado?.address?.City ?? '';
+          document.querySelector(".estado").textContent = resultado?.address?.Region ?? '';
+          document.querySelector(".pais").textContent = resultado?.address?.CountryCodeISO3 ?? '';
+          // document.querySelector(".lat").textContent = posicion.lat.toFixed(6) ?? '';
+          // document.querySelector(".lng").textContent = posicion.lng.toFixed(6) ?? '';
+          document.querySelector("#lat").value = resultado?.latlng?.lat ?? '';
+          document.querySelector("#lng").value = resultado?.latlng?.lng ?? '';
         });
   });
 
