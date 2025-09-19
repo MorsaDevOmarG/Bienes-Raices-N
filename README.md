@@ -149,6 +149,9 @@
   - Agregamos la línea:
     - _"dev": "concurrently \"npm run server\" \"npm run css\" \"npm run js\""_
   - Con esto evitamos tener varias consolas abiertas.
+- SEDDER
+  - Funciona para INSERTAR datos en la base de datos de manera maciva
+  
 
 ### Creando proyecto
 
