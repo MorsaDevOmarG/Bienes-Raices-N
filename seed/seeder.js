@@ -1,6 +1,8 @@
 import { exit } from "node:process";
 import categorias from "./categorias.js";
 import Categoria from "../models/Categoria.js";
+import precios from "./precios.js";
+import Precio from "../models/Precio.js";
 import db from "../config/db.js";
 
 const importarDatos = async () => {
@@ -12,7 +14,15 @@ const importarDatos = async () => {
     await db.sync();
 
     // Insertar los datos, bulkCreate es para insertar varios registros
-    await Categoria.bulkCreate(categorias);
+    // await Categoria.bulkCreate(categorias);
+
+    // await Precio.bulkCreate(precios);
+
+    // Otra forma de insertar los datos, ejecutandolos al mismo tiempo
+    await Promise.all([
+      Categoria.bulkCreate(categorias),
+      Precio.bulkCreate(precios),
+    ]);
 
     console.log("Datos importados correctamente");
     exit(0); // Forma de salir de un proceso sin error
