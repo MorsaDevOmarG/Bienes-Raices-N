@@ -243,3 +243,28 @@
 ## TEMPLATE ENGINE
 
 - 
+
+## ASOCIACIONES
+
+- Forma de relacionar _MODELOS_ y _TABLAS_
+- Las asociaciones son formas de cruzar información en tu base de datos.
+- _SEQUELIZE_ soporta todos los tipos de relaciones en una base de datos: **1:1, 1;N, N:N**.
+- La forma en que lo hace es por medio de métodos que ya existen en _SEQUELIZE_.
+- **hasOne**
+  - Es para crear relaciones: **1:1**, donde un registro puede tener hasta 1 registro relacionado en otra tabla.
+  - Ej: Una Propiedad tiene un Vendedor, un Usuario tiene un Perfil, un Producto tiene una Categoría.
+  - Sintáxis: Vendedor.hasOne(Propiedad)
+  - En este ejemplo; Propiedad deberá tener una llave foránea que haga referencia a un Vendedor, sino se específica, _SEQUELIZE_ lo va crear.
+- **hasMany**
+  - Es para crear relaciones: **1:N**, donde un registro puede tener múltiples coincidencias o relaciones en otra tabla.
+  - Ej: Un Vendedor tiene múltiples Propiedades, un Usuario tiene múltiples Posts, un Producto tiene múltiples Reviews.
+  - Sintaxis: Vendedor.hasMany(Propiedad).
+  - Ej: Propiedad deberá tener una llave foránea que haga referencia a un Vendedor.
+- **belongsTo**
+  - Al igual que _hasOne_, es para relaciones: **1:1**, donde un registro puede tener hasta 1 registro relacionado en otra tabla, la única diferencia es la sintaxis.
+  - Sintaxis: Propiedad.belongsTo(Vendedor).
+  - Ej: Propiedad deberá tener una llave foránea que haga referencia a un Vendedor, sino se específica, _SEQUELIZE_ lo va crear.
+**belongsToMany**
+  - Es utilizado para las relaciones **N:N**, en este tipo de relaciones se utiliza una tabla pivote, por lo tanto se realiza mediante 3 modelos.
+  - Sintaxis: Estudiante.belongsToMany(Clase, {throuhg: HorarioClase }).
+  - Ej: múltiples Estudiantes tendrán múltiples Clases, por lo tanto se crea unba 3er Tabla que sirve como pivote con referencias por llave foránea tanto a Estudiantes como Clases.
