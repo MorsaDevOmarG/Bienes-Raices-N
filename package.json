@@ -27,7 +27,8 @@
     "server": "nodemon index.js",
     "css": "postcss public/css/tailwind.css -o public/css/app.css --watch",
     "js": "webpack --watch",
-    "dev": "concurrently \"npm run server\" \"npm run css\" \"npm run js\""
+    "dev": "concurrently \"npm run server\" \"npm run css\" \"npm run js\"",
+    "db:importar": "node ./seed/seeder.js -i"
   },
   "dependencies": {
     "bcrypt": "^6.0.0",

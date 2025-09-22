@@ -151,7 +151,9 @@
   - Con esto evitamos tener varias consolas abiertas.
 - SEDDER
   - Funciona para INSERTAR datos en la base de datos de manera maciva
-  
+  - Al ejectuar el _SEDDER_, en la base de datos, ya se refleja el código que programamos, en este ejemplo, programamos una parte:
+    - **cateogiras.js**
+  - Cuando los ejecutamos, en la base de datos ya aparecen las categorías
 
 ### Creando proyecto
 

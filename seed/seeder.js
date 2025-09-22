@@ -22,3 +22,8 @@ const importarDatos = async () => {
     exit(1);
   }
 };
+
+// Ejecutar sedder
+if (process.argv[2] === "-i") {
+  importarDatos();
+}
