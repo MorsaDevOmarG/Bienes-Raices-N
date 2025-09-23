@@ -7,7 +7,14 @@ import Usuario from './Usuario.js';
 // Precio.hasOne(Propiedad);
 
 // Otra forma, también podemos personalizar la llave foránea, sino personalizamos, sequelize la crea automáticamente
-Precio.belonsTo(Propiedad, { foreignKey: 'precioId' });
+Propiedad.belongsTo(Precio, { foreignKey: "precioId" });
+
+// Una Propiedad pertenece a una Categoría
+Propiedad.belongsTo(Categoria, { foreignKey: 'categoriaId' });
+
+// Una Propiedad pertenece a un Usuario
+Propiedad.belongsTo(Usuario, { foreignKey: 'usuarioId' });
+
 
 
 
