@@ -26,6 +26,8 @@ const crear = async (req, res) => {
     csrfToken: req.csrfToken(),
     categorias,
     precios,
+    // datos:{}, sirve para que cuando el FORM se ingrese por primera vez, no marque error, porque en GUARDARA se envía el req.body
+    datos: {}
   });
 };
 
@@ -49,6 +51,7 @@ const guardar = async (req, res) => {
       categorias,
       precios,
       errores: resultado.array(),
+      datos: req.body
     });
   }
 };
