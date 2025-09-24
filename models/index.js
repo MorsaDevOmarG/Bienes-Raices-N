@@ -1,6 +1,6 @@
 import Propiedad from './Propiedad.js';
-import Categoria from './Categoria.js';
 import Precio from './Precio.js';
+import Categoria from './Categoria.js';
 import Usuario from './Usuario.js';
 
 // Relaciones, una Propiedad pertene a un Precio
@@ -19,4 +19,4 @@ Propiedad.belongsTo(Usuario, { foreignKey: 'usuarioId' });
 
 
 
-export { Propiedad, Categoria, Precio, Usuario };
+export { Propiedad, Precio, Categoria, Usuario };

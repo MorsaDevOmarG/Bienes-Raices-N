@@ -1,7 +1,8 @@
 import { validationResult } from "express-validator";
+import { Precio, Categoria, Propiedad } from "../models/index.js";
 
-import Categoria from "../models/Categoria.js";
-import Precio from "../models/Precio.js";
+// import Categoria from "../models/Categoria.js";
+// import Precio from "../models/Precio.js";
 
 const admin = (req, res) => {
   // res.send('Mis propiedades');
@@ -34,6 +35,7 @@ const crear = async (req, res) => {
 const guardar = async (req, res) => {
   // Validación
   let resultado = validationResult(req);
+
   if (!resultado.isEmpty()) {
     // Hay errores
     // console.log(resultado.array());
@@ -53,6 +55,30 @@ const guardar = async (req, res) => {
       errores: resultado.array(),
       datos: req.body
     });
+  }
+
+  // Crear un registro
+  // console.log(req.body);
+
+  try {
+    const { titulo, descripcion, habitaciones, estacionamiento, wc, calle, lat, lng, precio: precioId, categoria: categoriaId } = req.body;
+
+    const propiedadGuardada = await Propiedad.create({
+      titulo,
+      descripcion,
+      habitaciones,
+      estacionamiento,
+      wc,
+      calle,
+      lat,
+      lng,
+      precioId,
+      categoriaId,
+      usuarioId: req.usuario.id // El id del usuario autenticado
+    });
+
+  } catch (error) {
+    console.log(error);
   }
 };
 
