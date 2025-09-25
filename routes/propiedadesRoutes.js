@@ -8,9 +8,11 @@ const router = express.Router();
 
 // De esta forma protememos la ruta, para que solo se muestre cuando el usuario este autenticado
 router.get("/mis-propiedades", protegerRuta, admin);
-router.get("/propiedades/crear", crear);
+router.get("/propiedades/crear", protegerRuta, crear);
+// En este ejemplo, añadimos la validación de los CAMPOS
 router.post(
   "/propiedades/crear",
+  protegerRuta,
   body("titulo").notEmpty().withMessage("El título es obligatorio"),
   body("descripcion")
     .notEmpty()
