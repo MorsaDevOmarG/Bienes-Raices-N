@@ -154,6 +154,11 @@
   - Al ejectuar el _SEDDER_, en la base de datos, ya se refleja el código que programamos, en este ejemplo, programamos una parte:
     - **cateogiras.js**
   - Cuando los ejecutamos, en la base de datos ya aparecen las categorías
+  - En el: **package.json**, creamos unas líneas que van de la mano con los archivos _SEDDER_, que estos ayudan a insertar o eliminar valores
+    - **npm run db:importar_**
+    - **npm run db:eliminar_**
+  - Cada vez que crear código para el _SEDDER_, debemos eliminar y luego importar
+  - 
 
 ### Creando proyecto
 
