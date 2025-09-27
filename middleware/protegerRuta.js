@@ -4,7 +4,6 @@ import { Usuario } from '../models/index.js';
 const protegerRuta = async (req, res, next) => {
   console.log("Desde el middleware protegerRuta");
 
-  
   // Verificar si hay un token
   // console.log(req.cookies);
   // console.log(req.cookies._token);
@@ -17,10 +16,10 @@ const protegerRuta = async (req, res, next) => {
   // Comprobar si hay un token
   try {
     const decode = jwt.verify(_token, process.env.JWT_SECRET);
-    // console.log(decode);
+    console.log("Decode del Token:", decode);
 
-    const usuario = await Usuario.scope('eliminarPassword').finByPk(decode.id);
-    // console.log(usuario);
+    const usuario = await Usuario.scope('eliminarPassword').findByPk(decode.id);
+    console.log("Usuario Encontrado:" , usuario);
 
     // Almacenar el Usuario al Req
     if (usuario) {
