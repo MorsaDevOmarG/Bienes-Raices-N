@@ -16,10 +16,10 @@ const protegerRuta = async (req, res, next) => {
   // Comprobar si hay un token
   try {
     const decode = jwt.verify(_token, process.env.JWT_SECRET);
-    console.log("Decode del Token:", decode);
+    // console.log("Decode del Token:", decode);
 
     const usuario = await Usuario.scope('eliminarPassword').findByPk(decode.id);
-    console.log("Usuario Encontrado:" , usuario);
+    // console.log("Usuario Encontrado:" , usuario);
 
     // Almacenar el Usuario al Req
     if (usuario) {
