@@ -158,7 +158,10 @@
     - **npm run db:importar_**
     - **npm run db:eliminar_**
   - Cada vez que crear código para el _SEDDER_, debemos eliminar y luego importar
-  - 
+- Dropzone
+  - npm i dropzone@5.9.3
+  - Una vez que se instala, tenemos que agregarlo en el _wEBPACK.CONFIG.JS_
+  
 
 ### Creando proyecto
 
