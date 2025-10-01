@@ -8,7 +8,6 @@ const admin = (req, res) => {
   // res.send('Mis propiedades');
   res.render('propiedades/admin', {
     pagina: 'Mis propiedades',
-    barra: true
   });
 };
 
@@ -23,7 +22,6 @@ const crear = async (req, res) => {
   // res.send('Crear propiedad');
   res.render("propiedades/crear", {
     pagina: "Crear propiedad",
-    barra: true,
     csrfToken: req.csrfToken(),
     categorias,
     precios,
@@ -48,7 +46,6 @@ const guardar = async (req, res) => {
 
     return res.render("propiedades/crear", {
       pagina: "Crear propiedad",
-      barra: true,
       csrfToken: req.csrfToken(),
       categorias,
       precios,
@@ -90,4 +87,13 @@ const guardar = async (req, res) => {
   }
 };
 
-export { admin, crear, guardar };
+const agregarImagen = (req, res) => {
+  // res.send('Desde agregar imagen');
+
+  res.render('propiedades/agregar-imagen', {
+    pagina: 'Agregar Imagen',
+    csrfToken: req.csrfToken()
+  });
+};
+
+export { admin, crear, guardar, agregarImagen };
