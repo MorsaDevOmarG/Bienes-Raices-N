@@ -105,6 +105,12 @@ const agregarImagen = async (req, res) => {
   }
 
   // Validar que la propiedad pertenezca a quien visita esta página
+  // console.log(req.usuario);
+  // console.log(req.usuario.id);
+
+  if (req.usuario.id.toString() !== propiedad.usuarioId.toString()) {
+    return res.redirect("/mis-propiedades");
+  }
 
   res.render('propiedades/agregar-imagen', {
     pagina: 'Agregar Imagen',
