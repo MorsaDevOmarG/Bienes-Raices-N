@@ -2,7 +2,8 @@ extends ../layout/admin
 
 block styles
   link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.css")
-
+  //- Esta línea se agrega cuando configuramos DROPZONE, para que no marque ERROR al subir la imagen
+  meta(name="csrf-token", content=csrfToken)
 block contenido
 
   div.py-10
