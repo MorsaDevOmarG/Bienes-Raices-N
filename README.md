@@ -161,6 +161,12 @@
 - Dropzone
   - npm i dropzone@5.9.3
   - Una vez que se instala, tenemos que agregarlo en el _wEBPACK.CONFIG.JS_
+  - Extensión para poder subir imágenes
+- Multer
+  - **_npm i multer_**
+  - Permite recibir archivos enviados desde el cliente (imágenes, PDFs, documentos, etc.).
+  - Permite guardar esos archivos en el servidor o en memoria temporal.
+  - Facilita validaciones sobre los archivos (tipo, tamaño, cantidad, etc.).
   
 
 ### Creando proyecto
