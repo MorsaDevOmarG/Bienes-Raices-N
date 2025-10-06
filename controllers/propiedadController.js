@@ -4,10 +4,21 @@ import { Precio, Categoria, Propiedad } from "../models/index.js";
 // import Categoria from "../models/Categoria.js";
 // import Precio from "../models/Precio.js";
 
-const admin = (req, res) => {
+const admin = async (req, res) => {
+  const { id } = req.usuario;
+  // console.log(id);
+
+  const propiedades = await Propiedad.findAll({
+    where: {
+      usuarioId: id,
+    },
+    include: [Categoria, Precio],
+  });
+
   // res.send('Mis propiedades');
-  res.render('propiedades/admin', {
-    pagina: 'Mis propiedades',
+  res.render("propiedades/admin", {
+    pagina: "Mis propiedades",
+    propiedades
   });
 };
 
@@ -16,7 +27,7 @@ const crear = async (req, res) => {
   // Consultar Modelo de Precio y Categoría, es importante tomar en cuenta el orden
   const [categorias, precios] = await Promise.all([
     Categoria.findAll(),
-    Precio.findAll()
+    Precio.findAll(),
   ]);
 
   // res.send('Crear propiedad');
@@ -26,7 +37,7 @@ const crear = async (req, res) => {
     categorias,
     precios,
     // datos:{}, sirve para que cuando el FORM se ingrese por primera vez, no marque error, porque en GUARDARA se envía el req.body
-    datos: {}
+    datos: {},
   });
 };
 
@@ -41,7 +52,7 @@ const guardar = async (req, res) => {
     // Consultar Modelo de Precio y Categoría, es importante tomar en cuenta el orden
     const [categorias, precios] = await Promise.all([
       Categoria.findAll(),
-      Precio.findAll()
+      Precio.findAll(),
     ]);
 
     return res.render("propiedades/crear", {
@@ -50,19 +61,29 @@ const guardar = async (req, res) => {
       categorias,
       precios,
       errores: resultado.array(),
-      datos: req.body
+      datos: req.body,
     });
   }
 
   // Crear un registro
   // console.log(req.body);
-  const { titulo, descripcion, habitaciones, estacionamiento, wc, calle, lat, lng, precio: precioId, categoria: categoriaId } = req.body;
+  const {
+    titulo,
+    descripcion,
+    habitaciones,
+    estacionamiento,
+    wc,
+    calle,
+    lat,
+    lng,
+    precio: precioId,
+    categoria: categoriaId,
+  } = req.body;
   // console.log(req.usuario);
 
   const { id: usuarioId } = req.usuario;
 
   try {
-
     const propiedadGuardada = await Propiedad.create({
       titulo,
       descripcion,
@@ -75,13 +96,12 @@ const guardar = async (req, res) => {
       precioId,
       categoriaId,
       usuarioId,
-      imagen: ''
+      imagen: "",
     });
 
     const { id } = propiedadGuardada;
     res.redirect(`/propiedades/agregar-imagen/${id}`);
     // res.json(propiedadGuardada);
-
   } catch (error) {
     console.log(error);
   }
@@ -112,32 +132,32 @@ const agregarImagen = async (req, res) => {
     return res.redirect("/mis-propiedades");
   }
 
-  res.render('propiedades/agregar-imagen', {
+  res.render("propiedades/agregar-imagen", {
     pagina: `Agregar Imagen: ${propiedad.titulo}`,
     csrfToken: req.csrfToken(),
-    propiedad
+    propiedad,
   });
 };
 
 const almacenarImagen = async (req, res, next) => {
-    const { id } = req.params;
+  const { id } = req.params;
 
-    // Validar que la propiedad exista
-    const propiedad = await Propiedad.findByPk(id);
+  // Validar que la propiedad exista
+  const propiedad = await Propiedad.findByPk(id);
 
-    if (!propiedad) {
-      return res.redirect("/mis-propiedades");
-    }
+  if (!propiedad) {
+    return res.redirect("/mis-propiedades");
+  }
 
-    // Validar que la propiedad no esté publicada
-    if (propiedad.publicado) {
-      return res.redirect("/mis-propiedades");
-    }
+  // Validar que la propiedad no esté publicada
+  if (propiedad.publicado) {
+    return res.redirect("/mis-propiedades");
+  }
 
-    if (req.usuario.id.toString() !== propiedad.usuarioId.toString()) {
-      return res.redirect("/mis-propiedades");
-    }
-  
+  if (req.usuario.id.toString() !== propiedad.usuarioId.toString()) {
+    return res.redirect("/mis-propiedades");
+  }
+
   try {
     console.log(req.file);
 
