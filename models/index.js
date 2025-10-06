@@ -15,8 +15,4 @@ Propiedad.belongsTo(Categoria, { foreignKey: 'categoriaId' });
 // Una Propiedad pertenece a un Usuario
 Propiedad.belongsTo(Usuario, { foreignKey: 'usuarioId' });
 
-
-
-
-
 export { Propiedad, Precio, Categoria, Usuario };

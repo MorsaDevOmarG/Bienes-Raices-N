@@ -12,7 +12,12 @@ const admin = async (req, res) => {
     where: {
       usuarioId: id,
     },
-    include: [Categoria, Precio],
+    include: [
+      {
+        model: Categoria,
+        as: "categoria",
+      }
+    ],
   });
 
   // res.send('Mis propiedades');
