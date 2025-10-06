@@ -19,8 +19,11 @@ block contenido
             li(class="p-3 flex items-center")
               div(class="p-6 w-full flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-8 gap-4")
                 div(class="sm:w-1/4 md:w-1/6")
-                  img(class="", src=`/uploads/${propiedad.imagen}`, alt=`Imagen de la propiedad ${propiedad.titulo}`)
+                  img(class="w-full block", src=`/uploads/${propiedad.imagen}`, alt=`Imagen de la propiedad ${propiedad.titulo}`)
                 div(class="sm:w-2/4 md:w-3/6 lg:w-4/6")
+                  //- truncate = si el texto es muy largo, lo corta y agrega "..."
+                  a(class=" block text-2xl font-extrabold text-indigo-600 truncate" href="")=propiedad.titulo
+                  p(class="")=propiedad.categoriaId
                 div(class="sm:w-1/4 md:w-2/6 lg:w-1/6")
     else
       p.text-cemter No hay propiedades aún...
