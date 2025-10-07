@@ -16,13 +16,13 @@ block contenido
       div(class="bg-white shadow rounded-lg")
         ul(class="divide-y divide-gray-200")
           each propiedad in propiedades
-            li(class="p-3 flex items-center")
+            li
               div(class="p-6 w-full flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-8 md:space-y-0 gap-4")
                 div(class="sm:w-1/4 md:w-1/6")
                   img(class="w-full block", src=`/uploads/${propiedad.imagen}`, alt=`Imagen de la propiedad ${propiedad.titulo}`)
                 div(class="sm:w-2/4 md:w-3/6 lg:w-4/6 space-y-3")
                   //- truncate = si el texto es muy largo, lo corta y agrega "..."
-                  a(class=" block text-2xl font-extrabold text-indigo-600 truncate" href="")=propiedad.titulo
+                  a(class="block text-2xl font-extrabold text-indigo-600 truncate" href="")=propiedad.titulo
                   //- p(class="text-sm text-black font-bold")=propiedad.categoriaId
                   p(class="text-sm text-black font-bold")=propiedad.categoria.nombre
                   p(class="text-sm text-gray-500 font-bold flex items-center")
@@ -40,7 +40,7 @@ block contenido
                       value=`${propiedad.publicado ? 'Publicado' : 'No Publicado'}`
                     )
                   
-                  a(href="" class="px-2 py-2 md:py-1 text-xs leading-5 font-semibold rounded cursor-pointer bg-indigo-100 text-indigo-800 text-center") Editar
+                  a(href=`/propiedades/editar/${propiedad.id}` class="px-2 py-2 md:py-1 text-xs leading-5 font-semibold rounded cursor-pointer bg-indigo-100 text-indigo-800 text-center") Editar
 
                   form(action="" method="")
                     input(

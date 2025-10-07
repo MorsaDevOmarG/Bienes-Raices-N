@@ -27,7 +27,7 @@ const admin = async (req, res) => {
   // res.send('Mis propiedades');
   res.render("propiedades/admin", {
     pagina: "Mis propiedades",
-    propiedades
+    propiedades,
   });
 };
 
@@ -184,4 +184,23 @@ const almacenarImagen = async (req, res, next) => {
   }
 };
 
-export { admin, crear, guardar, agregarImagen, almacenarImagen };
+const editar = async (req, res) => {
+  // res.send("Desde editar propiedad");
+
+  const [categorias, precios] = await Promise.all([
+    Categoria.findAll(),
+    Precio.findAll(),
+  ]);
+
+  // res.send('Crear propiedad');
+  res.render("propiedades/editar", {
+    pagina: "Editar propiedad",
+    csrfToken: req.csrfToken(),
+    categorias,
+    precios,
+    // datos:{}, sirve para que cuando el FORM se ingrese por primera vez, no marque error, porque en GUARDARA se envía el req.body
+    datos: {},
+  });
+};
+
+export { admin, crear, guardar, agregarImagen, almacenarImagen, editar };
