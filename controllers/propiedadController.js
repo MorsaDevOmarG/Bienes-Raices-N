@@ -214,7 +214,7 @@ const editar = async (req, res) => {
     categorias,
     precios,
     // datos:{}, sirve para que cuando el FORM se ingrese por primera vez, no marque error, porque en GUARDARA se envía el req.body
-    datos: {},
+    datos: propiedad
   });
 };
 
