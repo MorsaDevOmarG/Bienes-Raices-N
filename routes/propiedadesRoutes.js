@@ -7,7 +7,8 @@ import {
   guardar,
   agregarImagen,
   almacenarImagen,
-  editar
+  editar,
+  guardarCambios,
 } from "../controllers/propiedadController.js";
 import protegerRuta from "../middleware/protegerRuta.js";
 import upload from "../middleware/subirImagen.js";
@@ -47,5 +48,26 @@ router.post(
   almacenarImagen
 );
 router.get("/propiedades/editar/:id", protegerRuta, editar);
+router.post(
+  "/propiedades/editar/:id",
+  protegerRuta,
+  body("titulo").notEmpty().withMessage("El título es obligatorio"),
+  body("descripcion")
+    .notEmpty()
+    .withMessage("La descripción es obligatoria")
+    .isLength({ max: 200 })
+    .withMessage("La descripción no puede ser mayor a 200 caracteres"),
+  body("categoria").isNumeric().withMessage("La categoría es obligatoria"),
+  body("precio").isNumeric().withMessage("El precio es obligatorio"),
+  body("habitaciones")
+    .isNumeric()
+    .withMessage("El número de habitaciones es obligatorio"),
+  body("estacionamiento")
+    .isNumeric()
+    .withMessage("El número de lugares de estacionamiento es obligatorio"),
+  body("wc").isNumeric().withMessage("El número de baños es obligatorio"),
+  body("lat").notEmpty().withMessage("Ubica la Propiedad en el Mapa"),
+  guardarCambios
+);
 
 export default router;

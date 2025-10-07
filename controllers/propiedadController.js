@@ -209,7 +209,7 @@ const editar = async (req, res) => {
 
   // res.send('Crear propiedad');
   res.render("propiedades/editar", {
-    pagina: "Editar propiedad",
+    pagina: `Editar propiedad: ${propiedad.titulo}`,
     csrfToken: req.csrfToken(),
     categorias,
     precios,
@@ -218,4 +218,44 @@ const editar = async (req, res) => {
   });
 };
 
-export { admin, crear, guardar, agregarImagen, almacenarImagen, editar };
+const guardarCambios = async (req, res) => {
+  // Verificar la validación
+  let resultado = validationResult(req);
+
+  if (!resultado.isEmpty()) {
+    // Hay errores
+    // console.log(resultado.array());
+    
+    const [categorias, precios] = await Promise.all([
+      Categoria.findAll(),
+      Precio.findAll(),
+    ]);
+
+    return res.render("propiedades/editar", {
+      pagina: "Editar propiedad",
+      csrfToken: req.csrfToken(),
+      categorias,
+      precios,
+      errores: resultado.array(),
+      datos: req.body,
+    });
+  }
+
+  // Validar que la propiedad exista
+  const { id } = req.params;
+  const propiedad = await Propiedad.findByPk(id);
+
+  if (!propiedad) {
+    return res.redirect("/mis-propiedades");
+  }
+
+  // Revisar que quien visita la página, sea quien creó la propiedad
+  if (req.usuario.id.toString() !== propiedad.usuarioId.toString()) {
+    return res.redirect("/mis-propiedades");
+  }
+
+  // Reescribir el objeto y actualizarlo
+  
+};
+
+export { admin, crear, guardar, agregarImagen, almacenarImagen, editar, guardarCambios };
