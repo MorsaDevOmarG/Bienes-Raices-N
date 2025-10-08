@@ -1,3 +1,4 @@
+import { unlink } from 'node:fs/promises';
 import { validationResult } from "express-validator";
 import { Precio, Categoria, Propiedad } from "../models/index.js";
 
@@ -295,7 +296,29 @@ const guardarCambios = async (req, res) => {
 };
 
 const eliminar = async (req, res) => {
-  console.log("Desde eliminar");
+  // console.log("Desde eliminar");
+
+  const { id } = req.params;
+
+  // Validar que la propiedad exista
+  const propiedad = await Propiedad.findByPk(id);
+
+  if (!propiedad) {
+    return res.redirect("/mis-propiedades");
+  }
+
+  // Revisar que quien visita la página, sea quien creó la propiedad
+  if (req.usuario.id.toString() !== propiedad.usuarioId.toString()) {
+    return res.redirect("/mis-propiedades");
+  }
+
+  // Eliminar la imagen
+  await unlink(`public/uploads/${propiedad.imagen}`);
+
+  // Eliminar la propiedad
+  await propiedad.destroy();
+
+  res.redirect("/mis-propiedades");
 };
 
 
