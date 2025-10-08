@@ -325,8 +325,30 @@ const eliminar = async (req, res) => {
 const mostrarPropiedad = async (req, res) => {
   // res.send('Desde mostrar propiedad');
 
-  res.render('propiedades/mostrar', {
-    pagina: 'Información propiedad'
+  const { id } = req.params;
+
+  const propiedad = await Propiedad.findByPk(id,
+    {
+      include: [
+        {
+          model: Categoria,
+          as: "categoria",
+        },
+        {
+          model: Precio,
+          as: "precio",
+        },
+      ],
+    }
+  );
+
+  if (!propiedad) {
+    return res.redirect("/404");
+  }
+
+  res.render("propiedades/mostrar", {
+    propiedad,
+    pagina: propiedad.titulo,
   });
 };
 
