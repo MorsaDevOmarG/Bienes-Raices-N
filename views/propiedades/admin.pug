@@ -42,7 +42,9 @@ block contenido
                   
                   a(href=`/propiedades/editar/${propiedad.id}` class="px-2 py-2 md:py-1 text-xs leading-5 font-semibold rounded cursor-pointer bg-indigo-100 text-indigo-800 text-center") Editar
 
-                  form(action="" method="")
+                  form(action=`/propiedades/eliminar/${propiedad.id}` method="POST")
+                    input(type="hidden" name="_csrf" value=csrfToken)
+                    
                     input(
                       type="submit" 
                       name="" 
