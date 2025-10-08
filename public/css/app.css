@@ -731,6 +731,9 @@ video {
 .p-6 {
   padding: 1.5rem;
 }
+.p-5 {
+  padding: 1.25rem;
+}
 .px-10 {
   padding-left: 2.5rem;
   padding-right: 2.5rem;
@@ -770,6 +773,10 @@ video {
 .py-8 {
   padding-top: 2rem;
   padding-bottom: 2rem;
+}
+.py-1 {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
 }
 .text-center {
   text-align: center;
