@@ -6,6 +6,9 @@ import { Precio, Categoria, Propiedad } from "../models/index.js";
 // import Precio from "../models/Precio.js";
 
 const admin = async (req, res) => {
+  // Leer query string
+  console.log(req.query);
+
   const { id } = req.usuario;
   // console.log(id);
 
