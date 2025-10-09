@@ -1,4 +1,4 @@
-import { unlink } from 'node:fs/promises';
+import { unlink } from "node:fs/promises";
 import { validationResult } from "express-validator";
 import { Precio, Categoria, Propiedad } from "../models/index.js";
 
@@ -18,31 +18,41 @@ const admin = async (req, res) => {
     return res.redirect("/mis-propiedades?pagina=1");
   }
 
-  const { id } = req.usuario;
-  // console.log(id);
+  try {
+    const { id } = req.usuario;
+    // console.log(id);
 
-  const propiedades = await Propiedad.findAll({
-    where: {
-      usuarioId: id,
-    },
-    include: [
-      {
-        model: Categoria,
-        as: "categoria",
-      },
-      {
-        model: Precio,
-        as: "precio",
-      },
-    ],
-  });
+    // Límites y offset para el paginador
+    const limit = 10;
+    const offset = ((paginaActual * limit) - limit);
 
-  // res.send('Mis propiedades');
-  res.render("propiedades/admin", {
-    pagina: "Mis propiedades",
-    propiedades,
-    csrfToken: req.csrfToken(),
-  });
+    const propiedades = await Propiedad.findAll({
+      limit,
+      offset,
+      where: {
+        usuarioId: id,
+      },
+      include: [
+        {
+          model: Categoria,
+          as: "categoria",
+        },
+        {
+          model: Precio,
+          as: "precio",
+        },
+      ],
+    });
+
+    // res.send('Mis propiedades');
+    res.render("propiedades/admin", {
+      pagina: "Mis propiedades",
+      propiedades,
+      csrfToken: req.csrfToken(),
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 // Función para crear una propiedad
@@ -200,9 +210,9 @@ const almacenarImagen = async (req, res, next) => {
 
 const editar = async (req, res) => {
   // res.send("Desde editar propiedad");
-  
+
   const { id } = req.params;
-  
+
   // Validar que la propiedad exista
   const propiedad = await Propiedad.findByPk(id);
 
@@ -228,7 +238,7 @@ const editar = async (req, res) => {
     categorias,
     precios,
     // datos:{}, sirve para que cuando el FORM se ingrese por primera vez, no marque error, porque en GUARDARA se envía el req.body
-    datos: propiedad
+    datos: propiedad,
   });
 };
 
@@ -239,7 +249,7 @@ const guardarCambios = async (req, res) => {
   if (!resultado.isEmpty()) {
     // Hay errores
     // console.log(resultado.array());
-    
+
     const [categorias, precios] = await Promise.all([
       Categoria.findAll(),
       Precio.findAll(),
@@ -284,7 +294,7 @@ const guardarCambios = async (req, res) => {
       precio: precioId,
       categoria: categoriaId,
     } = req.body;
-    
+
     propiedad.set({
       titulo,
       descripcion,
@@ -339,20 +349,18 @@ const mostrarPropiedad = async (req, res) => {
 
   const { id } = req.params;
 
-  const propiedad = await Propiedad.findByPk(id,
-    {
-      include: [
-        {
-          model: Categoria,
-          as: "categoria",
-        },
-        {
-          model: Precio,
-          as: "precio",
-        },
-      ],
-    }
-  );
+  const propiedad = await Propiedad.findByPk(id, {
+    include: [
+      {
+        model: Categoria,
+        as: "categoria",
+      },
+      {
+        model: Precio,
+        as: "precio",
+      },
+    ],
+  });
 
   if (!propiedad) {
     return res.redirect("/404");
@@ -364,5 +372,14 @@ const mostrarPropiedad = async (req, res) => {
   });
 };
 
-
-export { admin, crear, guardar, agregarImagen, almacenarImagen, editar, guardarCambios, eliminar, mostrarPropiedad };
+export {
+  admin,
+  crear,
+  guardar,
+  agregarImagen,
+  almacenarImagen,
+  editar,
+  guardarCambios,
+  eliminar,
+  mostrarPropiedad,
+};
