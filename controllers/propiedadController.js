@@ -12,7 +12,7 @@ const admin = async (req, res) => {
   const { pagina: paginaActual } = req.query;
 
   // Siempre tien que iniciar ^ y finalizar $ con números
-  const expresion = /^[0-9]$/;
+  const expresion = /^[1-9]$/;
 
   if (!expresion.test(paginaActual)) {
     return res.redirect("/mis-propiedades?pagina=1");
@@ -23,7 +23,7 @@ const admin = async (req, res) => {
     // console.log(id);
 
     // Límites y offset para el paginador
-    const limit = 2;
+    const limit = 1;
     const offset = ((paginaActual * limit) - limit);
 
     const [propiedades, total] = await Promise.all([
