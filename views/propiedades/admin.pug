@@ -59,7 +59,6 @@ block contenido
               if pagina == n
                 span(class="bg-indigo-50 border-indigo-500 text-indigo-700 relative inline-flex items-center px-4 py-2 border text-sm font-medium")= n
               else
-                a(href=`?pagina=${n}` class="bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium")= n
-              - n++;
+                a(href=`?pagina=${n}` class=`${paginaActual == n ? 'bg-indigo-50 border-indigo-500 text-indigo-600' : 'bg-white border-gray-300 text-gray-500 hover:bg-gray-50'} relative inline-flex items-center px-4 py-2 border text-sm font-medium`) #{n++}
     else
       p.text-cemter No hay propiedades aún...
