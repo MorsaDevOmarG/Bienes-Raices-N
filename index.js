@@ -4,6 +4,7 @@ import cookieParser from "cookie-parser";
 
 import usuarioRoutes from "./routes/usuarioRoutes.js";
 import propiedadesRoutes from "./routes/propiedadesRoutes.js";
+import appRoutes from "./routes/appRoutes.js";
 
 import db from "./config/db.js";
 
@@ -51,6 +52,8 @@ app.use(express.static("public"));
 
 // Routing
 // Todas las rutas que se encuentren en: auth, se van a encontrar en el archvio, en este ejemplo sería en: usuarioRoutes.js
+app.use("/", appRoutes);
+
 app.use("/auth", usuarioRoutes);
 
 app.use("/", propiedadesRoutes);
