@@ -7,4 +7,17 @@
     attribution:
       '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
   }).addTo(mapa);
+
+  const obtenerPropiedades = async () => {
+    try {
+      const url = "/api/propiedades";
+      const respuesta = await fetch(url);
+      const propiedades = await respuesta.json();
+      console.log(propiedades);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  obtenerPropiedades();
 })();
