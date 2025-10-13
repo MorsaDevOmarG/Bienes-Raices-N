@@ -1,7 +1,19 @@
+import { Propiedad, Precio, Categoria } from '../models/index.js'
+
 const propiedades = async (req, res) => {
-  res.json({
-    mensaje: "Desde propiedades",
+  const propiedades = await Propiedad.findAll({
+    include: [
+      { model: Precio, as: 'precio' },
+      { model: Categoria, as: 'categoria' }
+    ]
   });
+
+  res.json(propiedades);
+
+  // res.json({
+  //   // mensaje: "Desde propiedades",
+
+  // });
 };
 
 export { propiedades };
