@@ -5,6 +5,7 @@
 
   // Son una capa que estará sobre el mapa
   let markers = new L.FeatureGroup().addTo(mapa);
+  // console.log(markers); - encontramos en consola: PROTOTYPES y de nuevo PROTOTYPES, para ver las opciones de MARKERS
 
   let propiedades = [];
 
@@ -53,6 +54,9 @@
   const mostrarPropiedades = (propiedades) => {
     // console.log(propiedades);
 
+    // Limpiar los markers
+    markers.clearLayers();
+
     propiedades.forEach((propiedad) => {
       // Agregar el PIN
       const marker = new L.marker([propiedad?.lat, propiedad?.lng], {
@@ -80,7 +84,9 @@
     const resultado = propiedades
       .filter(filtrarCategoria)
       .filter(filtrarPrecio);
-    console.log(resultado);
+    // console.log(resultado);
+
+    mostrarPropiedades(resultado);
   };
 
   const filtrarCategoria = (propiedad) => {
