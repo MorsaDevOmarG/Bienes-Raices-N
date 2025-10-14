@@ -31,9 +31,17 @@
       // Agregar el PIN
       const marker = new L.marker([propiedad?.lat, propiedad?.lng], {
         autoPan: true,
-      })
-        .addTo(mapa)
-        .bindPopup("Información aquí");
+      }).addTo(mapa).bindPopup(`
+          <p class="text-indigo-600 font-bold">${propiedad?.categoria.nombre}</p>
+
+          <h1 class="text-xl font-extrabold uppercase my-2">${propiedad?.titulo}</h1>  
+
+          <img src="/uploads/${propiedad?.imagen}" alt="Imagen de la propiedad ${propiedad?.titulo}" />
+
+          <p class="text-gray-600 font-bold">${propiedad?.precio.nombre}</p>
+
+          <a class="bg-indigo-600 block p-2 text-center font-bold uppercase" href="/propiedad/${propiedad?.id}">Ver Propiedad</a>
+        `);
       
       markers.addLayer(marker);
     });
