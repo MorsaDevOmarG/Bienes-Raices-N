@@ -97,6 +97,12 @@ const buscador = async (req, res) => {
     include: [{ model: Precio, as: "precio" }],
   });
   // console.log(propiedades);
+
+  res.render("busqueda", {
+    pagina: `Resultados de la Búsqueda: ${termino}`,
+    propiedades,
+    csrfToknen: req.csrfToken(),
+  });
 };
 
 export { inicio, categoria, noEncontrado, buscador };
