@@ -17,11 +17,7 @@ const inicio = async (req, res) => {
           as: "precio",
         },
       ],
-      order: [
-        [
-          "createdAt", "DESC"
-        ]
-      ],
+      order: [["createdAt", "DESC"]],
     }),
     Propiedad.findAll({
       limit: 3,
@@ -34,11 +30,7 @@ const inicio = async (req, res) => {
           as: "precio",
         },
       ],
-      order: [
-        [
-          "createdAt", "DESC"
-        ]
-      ],
+      order: [["createdAt", "DESC"]],
     }),
   ]);
 
@@ -53,7 +45,32 @@ const inicio = async (req, res) => {
   });
 };
 
-const categoria = (req, res) => {};
+const categoria = async (req, res) => {
+  const { id } = req.params;
+  // console.log(id);
+
+  // Comprobar que la categoría exista
+  const categoria = await Categoria.findByPk(id);
+
+  if (!categoria) {
+    return res.redirect("/404");
+  }
+
+  // Obtener las propiedades de la Categoría
+  const propiedades = await Propiedad.findAll({
+    where: {
+      categoriaId: id,
+    },
+    include: [
+      { model: Precio, as: "precio" },
+    ],
+  });
+
+  res.render("categoria", {
+    pagina: `${categoria.nombre}s en Venta`,
+    propiedades,
+  });
+};
 
 const noEncontrado = (req, res) => {};
 
