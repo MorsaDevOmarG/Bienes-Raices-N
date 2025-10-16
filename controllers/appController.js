@@ -1,4 +1,4 @@
-import { raw } from "mysql2";
+import { Op } from "sequelize";
 import { Precio, Categoria, Propiedad } from "../models/index.js";
 
 const inicio = async (req, res) => {
@@ -62,9 +62,7 @@ const categoria = async (req, res) => {
     where: {
       categoriaId: id,
     },
-    include: [
-      { model: Precio, as: "precio" },
-    ],
+    include: [{ model: Precio, as: "precio" }],
   });
 
   res.render("categoria", {
@@ -81,8 +79,24 @@ const noEncontrado = (req, res) => {
   });
 };
 
-const buscador = (req, res) => {
-  
+const buscador = async (req, res) => {
+  const { termino } = req.body;
+
+  // Validar que termino no este vacío
+  if (!termino.trim()) {
+    return res.redirect("back");
+  }
+
+  // Consultar las propiedades
+  const propiedades = await Propiedad.findAll({
+    where: {
+      titulo: {
+        [Op.like]: `%${termino}%`,
+      },
+    },
+    include: [{ model: Precio, as: "precio" }],
+  });
+  // console.log(propiedades);
 };
 
 export { inicio, categoria, noEncontrado, buscador };
