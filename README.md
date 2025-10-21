@@ -282,3 +282,5 @@
   - Es utilizado para las relaciones **N:N**, en este tipo de relaciones se utiliza una tabla pivote, por lo tanto se realiza mediante 3 modelos.
   - Sintaxis: Estudiante.belongsToMany(Clase, {throuhg: HorarioClase }).
   - Ej: múltiples Estudiantes tendrán múltiples Clases, por lo tanto se crea unba 3er Tabla que sirve como pivote con referencias por llave foránea tanto a Estudiantes como Clases.
+- Nota:
+  - Cada vez que creamos un _MODELO_, debemos reiniciar el _SERVER_.
