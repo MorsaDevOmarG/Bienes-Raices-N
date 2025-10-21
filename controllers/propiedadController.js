@@ -363,7 +363,7 @@ const mostrarPropiedad = async (req, res) => {
 
   const { id } = req.params;
 
-  // console.log(req.usuario);
+  console.log(req.usuario);
 
   const propiedad = await Propiedad.findByPk(id, {
     include: [
