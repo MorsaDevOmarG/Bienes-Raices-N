@@ -1,5 +1,5 @@
 const esVendedor = (usuarioId, propiedadUsuarioId) => {
-  return usuarioId.toString() === propiedadUsuarioId.toString();
+  return usuarioId === propiedadUsuarioId;
 };
 
 export { esVendedor };

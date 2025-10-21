@@ -2,6 +2,8 @@ import { unlink } from "node:fs/promises";
 import { validationResult } from "express-validator";
 import { Precio, Categoria, Propiedad } from "../models/index.js";
 import { esVendedor } from "../helpers/index.js";
+import { error } from "node:console";
+import res from "express/lib/response.js";
 
 // import Categoria from "../models/Categoria.js";
 // import Precio from "../models/Precio.js";
@@ -364,7 +366,7 @@ const mostrarPropiedad = async (req, res) => {
 
   const { id } = req.params;
 
-  console.log(req.usuario);
+  // console.log(req.usuario);
 
   const propiedad = await Propiedad.findByPk(id, {
     include: [
@@ -388,9 +390,56 @@ const mostrarPropiedad = async (req, res) => {
   res.render("propiedades/mostrar", {
     propiedad,
     pagina: propiedad.titulo,
-    csrfToknen: req.csrfToken(),
+    csrfToken: req.csrfToken(),
     usuario: req.usuario,
-    esVendedor: esVendedor(req.usuario?.id, propiedad.usuarioId)
+    esVendedor: esVendedor(req.usuario?.id, propiedad.usuarioId),
+  });
+};
+
+const enviarMensaje = async (req, res) => {
+  const { id } = req.params;
+
+  // console.log(req.usuario);
+
+  const propiedad = await Propiedad.findByPk(id, {
+    include: [
+      {
+        model: Categoria,
+        as: "categoria",
+      },
+      {
+        model: Precio,
+        as: "precio",
+      },
+    ],
+  });
+
+  if (!propiedad) {
+    return res.redirect("/404");
+  }
+
+  // console.log(esVendedor(req.usuario?.id, propiedad.usuarioId));
+
+  // Renderizar errores - validación
+  let resultado = validationResult(req);
+
+  if (!resultado.isEmpty()) {
+    return res.render("propiedades/mostrar", {
+      propiedad,
+      pagina: propiedad.titulo,
+      csrfToken: req.csrfToken(),
+      usuario: req.usuario,
+      esVendedor: esVendedor(req.usario?.id, propiedad.usuarioId),
+      errores: resultado.array(),
+    });
+  }
+
+  res.render("propiedades/mostrar", {
+    propiedad,
+    pagina: propiedad.titulo,
+    csrfToken: req.csrfToken(),
+    usuario: req.usuario,
+    esVendedor: esVendedor(req.usuario?.id, propiedad.usuarioId),
   });
 };
 
@@ -404,4 +453,5 @@ export {
   guardarCambios,
   eliminar,
   mostrarPropiedad,
+  enviarMensaje
 };
