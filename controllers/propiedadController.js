@@ -1,6 +1,7 @@
 import { unlink } from "node:fs/promises";
 import { validationResult } from "express-validator";
 import { Precio, Categoria, Propiedad } from "../models/index.js";
+import { esVendedor } from "../helpers/index.js";
 
 // import Categoria from "../models/Categoria.js";
 // import Precio from "../models/Precio.js";
@@ -382,11 +383,14 @@ const mostrarPropiedad = async (req, res) => {
     return res.redirect("/404");
   }
 
+  // console.log(esVendedor(req.usuario?.id, propiedad.usuarioId));
+
   res.render("propiedades/mostrar", {
     propiedad,
     pagina: propiedad.titulo,
     csrfToknen: req.csrfToken(),
     usuario: req.usuario,
+    esVendedor: esVendedor(req.usuario?.id, propiedad.usuarioId)
   });
 };
 
