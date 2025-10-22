@@ -25,7 +25,7 @@ const admin = async (req, res) => {
 
     // Límites y offset para el paginador
     const limit = 1;
-    const offset = ((paginaActual * limit) - limit);
+    const offset = paginaActual * limit - limit;
 
     const [propiedades, total] = await Promise.all([
       Propiedad.findAll({
@@ -63,7 +63,7 @@ const admin = async (req, res) => {
       paginaActual: Number(paginaActual),
       total,
       offset,
-      limit
+      limit,
     });
   } catch (error) {
     console.log(error);
@@ -394,74 +394,77 @@ const mostrarPropiedad = async (req, res) => {
   });
 };
 
-  const enviarMensaje = async (req, res) => {
-    const { id } = req.params;
+const enviarMensaje = async (req, res) => {
+  const { id } = req.params;
 
-    // console.log(req.usuario);
+  // console.log(req.usuario);
 
-    const propiedad = await Propiedad.findByPk(id, {
-      include: [
-        {
-          model: Categoria,
-          as: "categoria",
-        },
-        {
-          model: Precio,
-          as: "precio",
-        },
-      ],
-    });
-
-    if (!propiedad) {
-      return res.redirect("/404");
-    }
-
-    // console.log(esVendedor(req.usuario?.id, propiedad.usuarioId));
-
-    // Renderizar errores - validación
-    let resultado = validationResult(req);
-
-    if (!resultado.isEmpty()) {
-      return res.render("propiedades/mostrar", {
-        propiedad,
-        pagina: propiedad.titulo,
-        csrfToken: req.csrfToken(),
-        usuario: req.usuario,
-        esVendedor: esVendedor(req.usario?.id, propiedad.usuarioId),
-        errores: resultado.array(),
-      });
-    }
-
-    console.log(req.body);
-    console.log(req.params);
-    console.log(req.usuario);
-
-    const { mensaje } = req.body;
-    const { id: propiedadId } = req.params;
-    const { id: usuarioId } = req.usuario;
-
-    // return;
-
-    // Almacemar el mensaje
-    await Mensaje.create(
+  const propiedad = await Propiedad.findByPk(id, {
+    include: [
       {
-        mensaje,
-        propiedadId,
-        usuarioId
-      }
-    );
+        model: Categoria,
+        as: "categoria",
+      },
+      {
+        model: Precio,
+        as: "precio",
+      },
+    ],
+  });
 
-    res.render("propiedades/mostrar", {
+  if (!propiedad) {
+    return res.redirect("/404");
+  }
+
+  // console.log(esVendedor(req.usuario?.id, propiedad.usuarioId));
+
+  // Renderizar errores - validación
+  let resultado = validationResult(req);
+
+  if (!resultado.isEmpty()) {
+    return res.render("propiedades/mostrar", {
       propiedad,
       pagina: propiedad.titulo,
       csrfToken: req.csrfToken(),
       usuario: req.usuario,
-      esVendedor: esVendedor(req.usuario?.id, propiedad.usuarioId),
-      enviado: true
+      esVendedor: esVendedor(req.usario?.id, propiedad.usuarioId),
+      errores: resultado.array(),
     });
+  }
 
-    res.redirect('/');
-  };
+  console.log(req.body);
+  console.log(req.params);
+  console.log(req.usuario);
+
+  const { mensaje } = req.body;
+  const { id: propiedadId } = req.params;
+  const { id: usuarioId } = req.usuario;
+
+  // return;
+
+  // Almacemar el mensaje
+  await Mensaje.create({
+    mensaje,
+    propiedadId,
+    usuarioId,
+  });
+
+  res.render("propiedades/mostrar", {
+    propiedad,
+    pagina: propiedad.titulo,
+    csrfToken: req.csrfToken(),
+    usuario: req.usuario,
+    esVendedor: esVendedor(req.usuario?.id, propiedad.usuarioId),
+    enviado: true,
+  });
+
+  res.redirect("/");
+};
+
+// Leer mensajes recibidos
+const verMensajes = async (req, res) => {
+  res.send('Mostrando mensajes...');
+};
 
 export {
   admin,
@@ -473,5 +476,6 @@ export {
   guardarCambios,
   eliminar,
   mostrarPropiedad,
-  enviarMensaje
+  enviarMensaje,
+  verMensajes
 };
