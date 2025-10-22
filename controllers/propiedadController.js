@@ -459,6 +459,8 @@ const mostrarPropiedad = async (req, res) => {
       esVendedor: esVendedor(req.usuario?.id, propiedad.usuarioId),
       enviado: true
     });
+
+    res.redirect('/');
   };
 
 export {
