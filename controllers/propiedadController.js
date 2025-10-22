@@ -24,7 +24,7 @@ const admin = async (req, res) => {
     // console.log(id);
 
     // Límites y offset para el paginador
-    const limit = 1;
+    const limit = 2;
     const offset = paginaActual * limit - limit;
 
     const [propiedades, total] = await Promise.all([
@@ -409,6 +409,10 @@ const enviarMensaje = async (req, res) => {
         model: Precio,
         as: "precio",
       },
+      {
+        model: Mensaje,
+        as: "mensajes",
+      },
     ],
   });
 
@@ -463,7 +467,7 @@ const enviarMensaje = async (req, res) => {
 
 // Leer mensajes recibidos
 const verMensajes = async (req, res) => {
-  res.send('Mostrando mensajes...');
+  res.send("Mostrando mensajes...");
 };
 
 export {
@@ -477,5 +481,5 @@ export {
   eliminar,
   mostrarPropiedad,
   enviarMensaje,
-  verMensajes
+  verMensajes,
 };

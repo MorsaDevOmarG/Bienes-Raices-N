@@ -16,6 +16,9 @@ Propiedad.belongsTo(Categoria, { foreignKey: "categoriaId" });
 // Una Propiedad pertenece a un Usuario
 Propiedad.belongsTo(Usuario, { foreignKey: "usuarioId" });
 
+// Un mensaje pertecene a un usuario
+Propiedad.hasMany(Mensaje, { foreignKey: "propiedadId" });
+
 Mensaje.belongsTo(Propiedad, { foreignKey: "propiedadId" });
 Mensaje.belongsTo(Usuario, { foreignKey: "usuarioId" });
 
