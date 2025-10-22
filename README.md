@@ -284,3 +284,6 @@
   - Ej: múltiples Estudiantes tendrán múltiples Clases, por lo tanto se crea unba 3er Tabla que sirve como pivote con referencias por llave foránea tanto a Estudiantes como Clases.
 - Nota:
   - Cada vez que creamos un _MODELO_, debemos reiniciar el _SERVER_.
+  - Debemos tomar en cuenta que primero creamos la tabla, en este proyecto primero la creamos en:
+    - **\Bienes-Raices-N\models\index.js**
+  - Para que las relaciones que tengamos, las agregue en la tabla.

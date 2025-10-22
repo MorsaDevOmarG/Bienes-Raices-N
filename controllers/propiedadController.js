@@ -394,61 +394,72 @@ const mostrarPropiedad = async (req, res) => {
   });
 };
 
-const enviarMensaje = async (req, res) => {
-  const { id } = req.params;
+  const enviarMensaje = async (req, res) => {
+    const { id } = req.params;
 
-  // console.log(req.usuario);
+    // console.log(req.usuario);
 
-  const propiedad = await Propiedad.findByPk(id, {
-    include: [
+    const propiedad = await Propiedad.findByPk(id, {
+      include: [
+        {
+          model: Categoria,
+          as: "categoria",
+        },
+        {
+          model: Precio,
+          as: "precio",
+        },
+      ],
+    });
+
+    if (!propiedad) {
+      return res.redirect("/404");
+    }
+
+    // console.log(esVendedor(req.usuario?.id, propiedad.usuarioId));
+
+    // Renderizar errores - validación
+    let resultado = validationResult(req);
+
+    if (!resultado.isEmpty()) {
+      return res.render("propiedades/mostrar", {
+        propiedad,
+        pagina: propiedad.titulo,
+        csrfToken: req.csrfToken(),
+        usuario: req.usuario,
+        esVendedor: esVendedor(req.usario?.id, propiedad.usuarioId),
+        errores: resultado.array(),
+      });
+    }
+
+    console.log(req.body);
+    console.log(req.params);
+    console.log(req.usuario);
+
+    const { mensaje } = req.body;
+    const { id: propiedadId } = req.params;
+    const { id: usuarioId } = req.usuario;
+
+    // return;
+
+    // Almacemar el mensaje
+    await Mensaje.create(
       {
-        model: Categoria,
-        as: "categoria",
-      },
-      {
-        model: Precio,
-        as: "precio",
-      },
-    ],
-  });
+        mensaje,
+        propiedadId,
+        usuarioId
+      }
+    );
 
-  if (!propiedad) {
-    return res.redirect("/404");
-  }
-
-  // console.log(esVendedor(req.usuario?.id, propiedad.usuarioId));
-
-  // Renderizar errores - validación
-  let resultado = validationResult(req);
-
-  if (!resultado.isEmpty()) {
-    return res.render("propiedades/mostrar", {
+    res.render("propiedades/mostrar", {
       propiedad,
       pagina: propiedad.titulo,
       csrfToken: req.csrfToken(),
       usuario: req.usuario,
-      esVendedor: esVendedor(req.usario?.id, propiedad.usuarioId),
-      errores: resultado.array(),
+      esVendedor: esVendedor(req.usuario?.id, propiedad.usuarioId),
+      enviado: true
     });
-  }
-
-  // console.log(req.body);
-  // console.log(req.params);
-  // console.log(req.usuario);
-
-  const { mensaje } = req.body;
-  const { id: propiedadId } = req.params;
-  const { id: usuarioId } = req.usuario;
-
-  // Almacemar el mensaje
-  await Mensaje.create(
-    {
-      mensaje,
-      propiedadId,
-      usuarioId
-    }
-  );
-};
+  };
 
 export {
   admin,
