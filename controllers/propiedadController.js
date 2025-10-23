@@ -7,7 +7,7 @@ import {
   Mensaje,
   Usuario,
 } from "../models/index.js";
-import { esVendedor } from "../helpers/index.js";
+import { esVendedor, formatearFecha } from "../helpers/index.js";
 
 // import Categoria from "../models/Categoria.js";
 // import Precio from "../models/Precio.js";
@@ -504,6 +504,7 @@ const verMensajes = async (req, res) => {
   res.render("propiedades/mensajes", {
     pagina: "Mensajes",
     mensajes: propiedad.mensajes,
+    formatearFecha
   });
 };
 

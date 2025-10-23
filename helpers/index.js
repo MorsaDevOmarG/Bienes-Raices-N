@@ -2,4 +2,8 @@ const esVendedor = (usuarioId, propiedadUsuarioId) => {
   return usuarioId === propiedadUsuarioId;
 };
 
-export { esVendedor };
+const formatearFecha = fecha => {
+  console.log(fecha);
+};
+
+export { esVendedor, formatearFecha };
