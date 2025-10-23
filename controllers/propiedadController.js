@@ -43,6 +43,10 @@ const admin = async (req, res) => {
             model: Precio,
             as: "precio",
           },
+          {
+            model: Mensaje,
+            as: "mensajes",
+          },
         ],
       }),
       Propiedad.count({
@@ -409,10 +413,6 @@ const enviarMensaje = async (req, res) => {
         model: Precio,
         as: "precio",
       },
-      {
-        model: Mensaje,
-        as: "mensajes",
-      },
     ],
   });
 
@@ -453,21 +453,41 @@ const enviarMensaje = async (req, res) => {
     usuarioId,
   });
 
-  res.render("propiedades/mostrar", {
-    propiedad,
-    pagina: propiedad.titulo,
-    csrfToken: req.csrfToken(),
-    usuario: req.usuario,
-    esVendedor: esVendedor(req.usuario?.id, propiedad.usuarioId),
-    enviado: true,
-  });
+  // res.render("propiedades/mostrar", {
+  //   propiedad,
+  //   pagina: propiedad.titulo,
+  //   csrfToken: req.csrfToken(),
+  //   usuario: req.usuario,
+  //   esVendedor: esVendedor(req.usuario?.id, propiedad.usuarioId),
+  //   enviado: true,
+  // });
 
   res.redirect("/");
 };
 
 // Leer mensajes recibidos
 const verMensajes = async (req, res) => {
-  res.send("Mostrando mensajes...");
+  // res.send("Mostrando mensajes...");
+
+  const { id } = req.params;
+
+  // Validar que la propiedad exista
+  const propiedad = await Propiedad.findByPk(id, {
+    include: [{ model: Mensaje, as: "mensajes" }],
+  });
+
+  if (!propiedad) {
+    return res.redirect("/mis-propiedades");
+  }
+
+  if (propiedad.usuarioId.toString() !== req.usuario.id.toString()) {
+    return res.redirect("/mis-propiedades");
+  }
+
+  res.render("propiedades/mensajes", {
+    pagina: "Mensajes",
+    mensajes: propiedad.mensajes,
+  });
 };
 
 export {
