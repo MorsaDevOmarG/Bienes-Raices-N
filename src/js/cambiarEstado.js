@@ -3,6 +3,7 @@
     // alert('cambiando estado');
 
     const cambiarEstadoBotones = document.querySelectorAll('.cambiar-estado');
+    const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
     cambiarEstadoBotones.forEach(boton => {
       boton.addEventListener('click', cambiarEstadoPropiedad);
@@ -19,7 +20,10 @@
         const url = `/propiedad/${id}`;
 
         const respuesta = await fetch(url, {
-          method: 'PUT'
+          method: 'PUT',
+          headers: {
+            'CSRF-TOKEN': token
+          }
         });
       } catch (error) {
         console.log(error);
