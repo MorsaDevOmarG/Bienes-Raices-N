@@ -4,6 +4,7 @@
 
     const cambiarEstadoBotones = document.querySelectorAll('.cambiar-estado');
     const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    
 
     cambiarEstadoBotones.forEach(boton => {
       boton.addEventListener('click', cambiarEstadoPropiedad);
