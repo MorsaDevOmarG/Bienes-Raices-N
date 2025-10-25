@@ -18,7 +18,7 @@
       // console.log(id);
 
       try {
-        const url = `/propiedad/${id}`;
+        const url = `/propiedades/${id}`;
 
         const respuesta = await fetch(url, {
           method: 'PUT',
@@ -26,6 +26,9 @@
             'CSRF-TOKEN': token
           }
         });
+
+        const resultado = await respuesta.json();
+        console.log(resultado);
       } catch (error) {
         console.log(error);
       }
