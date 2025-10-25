@@ -2,6 +2,7 @@ import express from "express";
 import {
   formularioLogin,
   autenticar,
+  cerrarSesion,
   formularioRegistro,
   registrar,
   confirmar,
@@ -45,6 +46,9 @@ router.post("/login", autenticar);
 //   .post("/", function (req, res) {
 //     res.json({ mensaje: "Usando Post en el servidor" });
 //   });
+
+// Cerrar sesión
+router.post('/cerrar-sesion', cerrarSesion);
 
 router.get("/registro", formularioRegistro);
 router.post("/registro", registrar);

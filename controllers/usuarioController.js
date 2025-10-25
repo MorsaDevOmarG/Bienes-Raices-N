@@ -91,6 +91,13 @@ const autenticar = async (req, res) => {
     .redirect("/mis-propiedades");
 };
 
+const cerrarSesion = async (req, res) => {
+  // console.log('Cerrando sesión...');
+  // res.send('Cerrando');
+
+  return res.clearCookie('_token').status(200).redirect('/auth/login');
+};
+
 const formularioRegistro = (req, res) => {
   // console.log(req.csrfToken());
 
@@ -342,6 +349,7 @@ const nuevoPassword = async (req, res) => {
 export {
   formularioLogin,
   autenticar,
+  cerrarSesion,
   formularioRegistro,
   registrar,
   confirmar,
