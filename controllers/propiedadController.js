@@ -394,7 +394,7 @@ const cambiarEstado = async (req, res) => {
   await propiedad.save();
 
   res.json({
-    resultado: 'ok'
+    resultado: 'true'
   });
 
 };
